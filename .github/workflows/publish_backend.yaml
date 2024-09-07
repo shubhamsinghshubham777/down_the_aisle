@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
+      - '.github/workflows/publish_backend.yaml'
       - 'backend/**'
       - 'core/**'
   workflow_dispatch:
@@ -22,20 +23,10 @@ jobs:
       run: |
         cd backend
         dart pub get
-        cd ../core
-        dart pub get
+        cd ..
     
     - name: Install Globe CLI
       run: dart pub global activate globe_cli
     
-    - name: Build Dart Frog project
-      run: |
-        cd backend
-        dart pub global run globe_cli build
-    
     - name: Deploy to Globe
-      run: |
-        cd backend
-        dart pub global run globe_cli deploy
-      env:
-        GLOBE_TOKEN: ${{ secrets.GLOBE_TOKEN }}
+      run: globe deploy --token=${{ secrets.GLOBE_TOKEN }} --project="${{ secrets.GLOBE_PROJECT_ID }}"
