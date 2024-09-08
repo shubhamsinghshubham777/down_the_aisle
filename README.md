@@ -15,3 +15,13 @@ where `NEW_FLUTTER_VERSION` is the version you want to upgrade to. For example:
 ```sh
 chmod +x scripts/change_flutter_version.sh; ./scripts/change_flutter_version.sh 3.24.2
 ```
+
+## Common Code Snippets
+
+```sh
+fvm dart run build_runner build --delete-conflicting-outputs
+```
+
+```sh
+fvm dart run build_runner watch --delete-conflicting-outputs
+```

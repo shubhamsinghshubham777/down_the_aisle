@@ -1,2 +1,11 @@
 .dart_tool/
 *.secrets
+
+# Environment variables
+*.env.*
+
+# Log files
+*.log
+
+# Generated files
+*.g.*

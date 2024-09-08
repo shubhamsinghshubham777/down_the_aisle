@@ -19,12 +19,6 @@ change_dir_and_use_fvm() {
     cd ..
 }
 
-# Function to update flutter-version in .github/workflows/publish_backend.yaml
-update_github_workflow() {
-    echo "Updating flutter-version in .github/workflows/publish_backend.yaml..."
-    sed -i '' "s/flutter-version: .*/flutter-version: $VERSION/" .github/workflows/publish_backend.yaml
-}
-
 # Function to update flutter-version in README.md
 update_readme() {
     echo "Updating flutter-version in README.md..."
@@ -36,9 +30,6 @@ change_dir_and_use_fvm "frontend"
 
 # Execute for backend
 change_dir_and_use_fvm "backend"
-
-# Update GitHub workflow
-update_github_workflow
 
 # Update README.md
 update_readme

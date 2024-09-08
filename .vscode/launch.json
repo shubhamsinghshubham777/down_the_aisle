@@ -8,14 +8,16 @@
             "name": "frontend",
             "cwd": "frontend",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "toolArgs": ["--dart-define", "APP_ENV=dev"]
         },
         {
             "name": "frontend (profile mode)",
             "cwd": "frontend",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "toolArgs": ["--dart-define", "APP_ENV=dev"]
         },
         {
             "name": "frontend (release mode)",
