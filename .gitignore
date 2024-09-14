@@ -1,4 +1,5 @@
 .dart_tool/
+.dart_tool/*.*
 *.secrets
 
 # Environment variables
@@ -9,3 +10,5 @@
 
 # Generated files
 *.g.*
+*.freezed.*
+*.mocks.*
