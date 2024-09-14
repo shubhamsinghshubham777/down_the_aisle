@@ -2,7 +2,9 @@ name: Deploy Dart Frog Backend
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - dev
     paths:
       - '.github/workflows/publish_backend.yaml'
       - 'backend/**'
@@ -29,4 +31,9 @@ jobs:
       run: dart pub global activate globe_cli
     
     - name: Deploy to Globe
-      run: globe deploy --token=${{ secrets.GLOBE_TOKEN }} --project="${{ secrets.GLOBE_PROJECT_ID }}"
+      run: |
+        if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
+          globe deploy --token=${{ secrets.GLOBE_TOKEN }} --project="${{ secrets.GLOBE_PROJECT_ID }}" --prod
+        else
+          globe deploy --token=${{ secrets.GLOBE_TOKEN }} --project="${{ secrets.GLOBE_PROJECT_ID }}"
+        fi
