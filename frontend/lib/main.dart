@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +15,11 @@ import 'package:frontend/utils/utils.dart';
 
 Future<void> main() async {
   final appEnv = AppEnvironment.values.firstWhere(
-    (e) => e.name == const String.fromEnvironment("APP_ENV"),
+    (e) => e.name == const String.fromEnvironment('APP_ENV'),
     orElse: () => AppEnvironment.prod,
   );
-  await dotenv.load(fileName: ".env.${appEnv.name}");
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await dotenv.load(fileName: '.env.${appEnv.name}');
+  unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
@@ -60,8 +62,8 @@ class _AppState extends ConsumerState<App> {
         useMaterial3: true,
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: appColors.primaryDark,
-          selectionColor: appColors.secondaryDark,
-          selectionHandleColor: appColors.primaryDark,
+          selectionColor: appColors.secondaryMedium,
+          selectionHandleColor: appColors.secondaryMedium,
         ),
       ),
       home: PageTransitionSwitcher(
@@ -70,7 +72,7 @@ class _AppState extends ConsumerState<App> {
           return SlideTransition(
             position: Tween<Offset>(
               begin: Offset.zero,
-              end: const Offset(-1.0, 0.0),
+              end: const Offset(-1, 0),
             ).animate(
               CurvedAnimation(
                 parent: secondaryAnimation,
@@ -79,7 +81,7 @@ class _AppState extends ConsumerState<App> {
             ),
             child: SlideTransition(
               position: Tween<Offset>(
-                begin: const Offset(1.0, 0.0),
+                begin: const Offset(1, 0),
                 end: Offset.zero,
               ).animate(
                 CurvedAnimation(

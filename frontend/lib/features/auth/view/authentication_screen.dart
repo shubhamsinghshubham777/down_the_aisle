@@ -5,6 +5,7 @@ import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_button.dart';
 import 'package:frontend/common/view/greeting_bg_clipper.dart';
 import 'package:frontend/constants/assets.dart';
+import 'package:frontend/features/auth/view/login_dialog.dart';
 import 'package:frontend/features/auth/view/sign_up_dialog.dart';
 import 'package:frontend/utils/constants.dart';
 
@@ -58,7 +59,6 @@ class AuthenticationScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 180),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -94,13 +94,19 @@ class AuthenticationScreen extends StatelessWidget {
                             const SizedBox(height: 19),
                             DTAButton.filled(
                               text: 'Sign Up',
-                              onTap: () => showModal(
+                              onTap: () => showModal<void>(
                                 context: context,
                                 builder: (_) => const SignUpDialog(),
                               ),
                             ),
                             const SizedBox(height: 16),
-                            const DTAButton.outlined(text: 'Login'),
+                            DTAButton.outlined(
+                              text: 'Login',
+                              onTap: () => showModal<void>(
+                                context: context,
+                                builder: (_) => const LoginDialog(),
+                              ),
+                            ),
                           ],
                         ),
                       ),

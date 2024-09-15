@@ -21,7 +21,7 @@ abstract class CredentialManager {
     int refreshTokenExpiryDays = 30,
   });
 
-  void verifyJWT(String token);
+  JWTPayload? verifyJWT(String token);
 }
 
 class CredentialManagerImpl implements CredentialManager {
@@ -67,7 +67,7 @@ class CredentialManagerImpl implements CredentialManager {
       'aud': config.jwtAudience,
       'iss': config.jwtIssuer,
       'email': email,
-      'tokenType': _TokenType.access.name,
+      'tokenType': TokenType.access.name,
       'exp': accessTokenExpiryDate.millisecondsSinceEpoch ~/ 1000,
       'iat': currentTimeMillis ~/ 1000,
     };
@@ -80,7 +80,7 @@ class CredentialManagerImpl implements CredentialManager {
         'aud': config.jwtAudience,
         'iss': config.jwtIssuer,
         'email': email,
-        'tokenType': _TokenType.refresh.name,
+        'tokenType': TokenType.refresh.name,
         'exp': refreshTokenExpiryDate.millisecondsSinceEpoch ~/ 1000,
         'iat': currentTimeMillis ~/ 1000,
       };
@@ -91,7 +91,7 @@ class CredentialManagerImpl implements CredentialManager {
   }
 
   @override
-  void verifyJWT(String token) {
+  JWTPayload? verifyJWT(String token) {
     final parts = token.split('.');
     if (parts.length != 3) {
       throw JWTFormatException('Invalid token format');
@@ -133,6 +133,13 @@ class CredentialManagerImpl implements CredentialManager {
       if (payload['iss'] != config.jwtIssuer) {
         throw JWTInvalidClaimException('Invalid issuer');
       }
+
+      return JWTPayload(
+        payload['email'] as String,
+        TokenType.values.firstWhere(
+          (type) => type.name == payload['tokenType'],
+        ),
+      );
     } catch (e) {
       if (e is JWTException) rethrow;
       throw JWTFormatException('Failed to parse token: $e');
@@ -173,4 +180,11 @@ class CredentialManagerImpl implements CredentialManager {
   }
 }
 
-enum _TokenType { access, refresh }
+enum TokenType { access, refresh }
+
+class JWTPayload {
+  const JWTPayload(this.email, this.type);
+
+  final String email;
+  final TokenType type;
+}

@@ -8,7 +8,6 @@ class LoginRequest with _$LoginRequest {
   const factory LoginRequest({
     required String email,
     required String password,
-    String? imageUrl,
   }) = _LoginRequest;
 
   factory LoginRequest.fromJson(Map<String, Object?> json) =>

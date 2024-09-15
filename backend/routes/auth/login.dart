@@ -38,7 +38,7 @@ Future<Response> onRequest(RequestContext context) async {
   final credentialManager = context.read<CredentialManager>();
   final hashedPassword = credentialManager.getHashedPassword(
     password: loginRequest.password,
-    salt: user.passwordSalt,
+    salt: user.passwordSalt!,
   );
 
   // If hashed passwords do not match, return an error response

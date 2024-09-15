@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:core/models/auth/dta_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'register_request.freezed.dart';
@@ -11,6 +12,7 @@ class RegisterRequest with _$RegisterRequest {
     required String firstName,
     required String email,
     required String password,
+    required Gender gender,
     @Uint8ListConverter() Uint8List? imageBytes,
   }) = _RegisterRequest;
 

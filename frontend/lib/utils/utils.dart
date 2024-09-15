@@ -9,7 +9,7 @@ void debugLog(
   if (kDebugMode) {
     debugPrint('${tag.toUpperCase()} => $e');
     if (stackTrace != null) {
-      debugPrintStack(stackTrace: stackTrace, label: tag);
+      debugPrintStack(stackTrace: stackTrace, label: '${tag.toUpperCase()} =>');
     }
   }
 }

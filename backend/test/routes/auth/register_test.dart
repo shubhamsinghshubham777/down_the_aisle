@@ -25,6 +25,7 @@ void main() {
       registerRequest = RegisterRequest(
         firstName: _fakeUser.firstName,
         email: _fakeUser.email,
+        gender: _fakeUser.gender,
         password: 'test_password',
       );
 
@@ -47,15 +48,15 @@ void main() {
       );
 
       when(credentialManager.generateRandomSalt).thenReturn(
-        _fakeUser.passwordSalt,
+        _fakeUser.passwordSalt!,
       );
 
       when(
         () => credentialManager.getHashedPassword(
           password: registerRequest.password,
-          salt: _fakeUser.passwordSalt,
+          salt: _fakeUser.passwordSalt!,
         ),
-      ).thenReturn(_fakeUser.hashedPassword);
+      ).thenReturn(_fakeUser.hashedPassword!);
     });
 
     test('responds with 400 for non-POST requests', () async {
@@ -113,6 +114,7 @@ void main() {
 const _fakeUser = DTAUser(
   firstName: 'test_name',
   email: 'test@email.com',
+  gender: Gender.male,
   hashedPassword: 'test_hashed_password',
   passwordSalt: 'test_salt',
 );

@@ -1,28 +1,50 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:core/models/auth/dta_user.dart';
+import 'package:core/models/auth/register_request.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_button.dart';
+import 'package:frontend/common/view/dta_text_field.dart';
+import 'package:frontend/common/view/zoom_tap_animation.dart';
+import 'package:frontend/features/auth/provider/auth_providers.dart';
 import 'package:frontend/utils/constants.dart';
+import 'package:frontend/utils/extensions.dart';
 
-class SignUpDialog extends StatefulWidget {
+class SignUpDialog extends ConsumerStatefulWidget {
   const SignUpDialog({super.key});
 
   @override
-  State<SignUpDialog> createState() => _SignUpDialogState();
+  ConsumerState<SignUpDialog> createState() => _SignUpDialogState();
 }
 
-class _SignUpDialogState extends State<SignUpDialog> {
+class _SignUpDialogState extends ConsumerState<SignUpDialog> {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
   Uint8List? imageBytes;
+  Gender gender = Gender.male;
 
   @override
   Widget build(BuildContext context) {
+    final isRegistering = ref.watch(authenticationProvider).isLoading;
+
+    ref.listen(authenticationProvider, (oldState, newState) {
+      if (oldState is AsyncLoading &&
+          newState is AsyncData &&
+          newState.valueOrNull == null) {
+        context
+          ..pop<void>()
+          ..showSnackbar(
+            '✅ Registration successful! Please log in to continue.',
+          );
+      }
+    });
+
     return AlertDialog(
       backgroundColor: appColors.accent,
       title: Row(
@@ -54,7 +76,7 @@ class _SignUpDialogState extends State<SignUpDialog> {
                 child: IconButton(
                   onPressed: selectImage,
                   icon: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Icon(
                       Icons.photo,
                       size: 32,
@@ -74,7 +96,7 @@ class _SignUpDialogState extends State<SignUpDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _AuthTextField(
+              DTATextField(
                 labelText: 'First Name',
                 controller: nameController,
                 keyboardType: TextInputType.name,
@@ -86,7 +108,38 @@ class _SignUpDialogState extends State<SignUpDialog> {
                   return null;
                 },
               ),
-              _AuthTextField(
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: Gender.values.map((g) {
+                    return ZoomTapAnimation(
+                      onTap: () => setState(() => gender = g),
+                      child: AnimatedContainer(
+                        duration: Durations.short4,
+                        decoration: BoxDecoration(
+                          color: gender == g
+                              ? appColors.primaryLight
+                              : appColors.secondaryDark,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            g.name.capitalizeFirst,
+                            style: context.bodyMedium?.copyWith(
+                              color: gender == g
+                                  ? appColors.secondaryDark
+                                  : appColors.primaryLight,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              DTATextField(
                 labelText: 'E-mail',
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -100,7 +153,7 @@ class _SignUpDialogState extends State<SignUpDialog> {
                   return null;
                 },
               ),
-              _AuthTextField(
+              DTATextField(
                 labelText: 'Password',
                 controller: passwordController,
                 keyboardType: TextInputType.visiblePassword,
@@ -113,12 +166,12 @@ class _SignUpDialogState extends State<SignUpDialog> {
                   if (value?.isNotSecurePassword ?? false) {
                     return 'Password must be at least 8 characters long '
                         'and include uppercase, lowercase, number, and '
-                        'special character (@\$!%*?&).';
+                        r'special character (@$!%*?&).';
                   }
                   return null;
                 },
               ),
-              _AuthTextField(
+              DTATextField(
                 labelText: 'Repeat Password',
                 controller: repeatPasswordController,
                 keyboardType: TextInputType.visiblePassword,
@@ -134,11 +187,20 @@ class _SignUpDialogState extends State<SignUpDialog> {
               ),
               const SizedBox(height: 24),
               DTAButton.filled(
+                enabled: !isRegistering,
                 text: 'Submit',
                 backgroundColor: appColors.primaryDark,
                 onTap: () {
                   if (formKey.currentState?.validate() ?? false) {
-                    context.pop();
+                    ref.read(authenticationProvider.notifier).registerUser(
+                          RegisterRequest(
+                            firstName: nameController.text.trim(),
+                            email: emailController.text.trim(),
+                            gender: gender,
+                            password: passwordController.text.trim(),
+                            imageBytes: imageBytes,
+                          ),
+                        );
                   } else {}
                 },
               ),
@@ -158,94 +220,6 @@ class _SignUpDialogState extends State<SignUpDialog> {
     if (result != null) {
       setState(() => imageBytes = result.files.first.bytes);
     }
-  }
-}
-
-class _AuthTextField extends StatefulWidget {
-  const _AuthTextField({
-    required this.labelText,
-    required this.controller,
-    required this.validator,
-    required this.keyboardType,
-    this.isSecure = false,
-    this.maxLength,
-    this.isLastField = false,
-  });
-
-  final String labelText;
-  final TextEditingController controller;
-  final FormFieldValidator<String> validator;
-  final bool isSecure;
-  final int? maxLength;
-  final bool isLastField;
-  final TextInputType keyboardType;
-
-  @override
-  State<_AuthTextField> createState() => _AuthTextFieldState();
-}
-
-class _AuthTextFieldState extends State<_AuthTextField> {
-  late bool localIsSecure = widget.isSecure;
-  final borderWithSurfaceColor = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(12),
-    borderSide: BorderSide(color: appColors.surface),
-  );
-  final borderWithPrimaryColor = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(12),
-    borderSide: BorderSide(color: appColors.primaryMedium),
-  );
-  final secondaryTextStyle = TextStyle(
-    color: appColors.surface,
-    fontFamily: Constants.fontKrylon,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: TextFormField(
-        controller: widget.controller,
-        cursorWidth: 1,
-        cursorHeight: 16,
-        cursorOpacityAnimates: true,
-        cursorRadius: const Radius.circular(24),
-        cursorColor: appColors.surface,
-        decoration: InputDecoration(
-          enabledBorder: borderWithSurfaceColor,
-          focusedBorder: borderWithPrimaryColor,
-          errorBorder: borderWithPrimaryColor,
-          focusedErrorBorder: borderWithSurfaceColor,
-          labelText: widget.labelText,
-          labelStyle: secondaryTextStyle,
-          helperStyle: secondaryTextStyle,
-          errorStyle: TextStyle(color: appColors.primaryMedium),
-          suffixIcon: !widget.isSecure
-              ? null
-              : Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: IconButton(
-                    onPressed: () => setState(
-                      () => localIsSecure = !localIsSecure,
-                    ),
-                    icon: Icon(
-                      localIsSecure ? Icons.visibility : Icons.visibility_off,
-                      color: appColors.surface,
-                    ),
-                  ),
-                ),
-          errorMaxLines: 5,
-        ),
-        keyboardType: widget.keyboardType,
-        maxLength: widget.maxLength,
-        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-        obscureText: localIsSecure,
-        style: TextStyle(
-          color: appColors.surface,
-          fontFamily: !localIsSecure ? Constants.fontKrylon : null,
-        ),
-        validator: widget.validator,
-      ),
-    );
   }
 }
 

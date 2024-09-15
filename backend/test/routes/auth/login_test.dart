@@ -55,9 +55,9 @@ void main() {
       when(
         () => credentialManager.getHashedPassword(
           password: loginRequest.password,
-          salt: _fakeUser.passwordSalt,
+          salt: _fakeUser.passwordSalt!,
         ),
-      ).thenReturn(_fakeUser.hashedPassword);
+      ).thenReturn(_fakeUser.hashedPassword!);
 
       when(
         () => credentialManager.generateJWT(
@@ -90,10 +90,7 @@ void main() {
 
     test('responds with a 400 for non-POST requests', () async {
       when(() => context.request).thenReturn(
-        Request.get(
-          Uri.parse('http://localhost/auth/login'),
-          body: jsonEncode(loginRequest),
-        ),
+        Request.get(Uri.base, body: jsonEncode(loginRequest)),
       );
 
       final response = await route.onRequest(context);
@@ -105,6 +102,7 @@ void main() {
 const _fakeUser = DTAUser(
   firstName: 'test_name',
   email: 'test@email.com',
+  gender: Gender.male,
   hashedPassword: 'test_hashed_password',
   passwordSalt: 'test_salt',
 );

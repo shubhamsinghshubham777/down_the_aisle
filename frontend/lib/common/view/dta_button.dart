@@ -5,18 +5,20 @@ import 'package:frontend/utils/constants.dart';
 
 class DTAButton extends StatelessWidget {
   const DTAButton.filled({
-    super.key,
     required this.text,
+    super.key,
     this.onTap,
     this.backgroundColor,
+    this.enabled = true,
   })  : filled = true,
         borderColor = null;
 
   const DTAButton.outlined({
-    super.key,
     required this.text,
+    super.key,
     this.onTap,
     this.borderColor,
+    this.enabled = true,
   })  : filled = false,
         backgroundColor = null;
 
@@ -25,32 +27,38 @@ class DTAButton extends StatelessWidget {
   final bool filled;
   final Color? backgroundColor;
   final Color? borderColor;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return ZoomTapAnimation(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color:
-                filled ? Colors.transparent : (borderColor ?? appColors.accent),
+      onTap: enabled ? onTap : null,
+      child: AnimatedOpacity(
+        duration: Durations.short4,
+        opacity: enabled ? 1 : 0.5,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: filled
+                  ? Colors.transparent
+                  : (borderColor ?? appColors.accent),
+            ),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12),
+            ),
+            color: filled
+                ? (backgroundColor ?? appColors.accent)
+                : Colors.transparent,
           ),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(12),
-            bottomRight: Radius.circular(12),
-          ),
-          color: filled
-              ? (backgroundColor ?? appColors.accent)
-              : Colors.transparent,
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 9),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: filled ? appColors.surface : null,
-            fontFamily: Constants.fontDMSerifDisplay,
-            fontSize: 16,
+          padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 9),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: filled ? appColors.surface : null,
+              fontFamily: Constants.fontDMSerifDisplay,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
