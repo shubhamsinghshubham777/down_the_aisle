@@ -7,7 +7,7 @@ import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_button.dart';
 import 'package:frontend/common/view/dta_text_field.dart';
 import 'package:frontend/features/auth/provider/auth_providers.dart';
-import 'package:frontend/features/dashboard/view/dashboard_screen.dart';
+import 'package:frontend/features/main/view/main_screen.dart';
 import 'package:frontend/utils/constants.dart';
 import 'package:frontend/utils/utils.dart';
 
@@ -33,7 +33,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
           newState.valueOrNull != null) {
         context
           ..pop<void>()
-          ..pushReplacement(const DashboardScreen());
+          ..pushReplacement(const MainScreen());
       }
 
       if (newState is AsyncError) {

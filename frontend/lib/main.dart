@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/common/providers.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/features/auth/view/authentication_screen.dart';
-import 'package:frontend/features/dashboard/view/dashboard_screen.dart';
+import 'package:frontend/features/main/view/main_screen.dart';
 import 'package:frontend/utils/extensions.dart';
 import 'package:frontend/utils/utils.dart';
 
@@ -101,7 +101,7 @@ class _AppState extends ConsumerState<App> {
                 ),
               )
             : isUserLoggedIn!
-                ? const DashboardScreen()
+                ? const MainScreen()
                 : const AuthenticationScreen(),
       ),
     );
