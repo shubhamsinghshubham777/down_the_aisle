@@ -3,7 +3,7 @@ import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_button.dart';
-import 'package:frontend/common/view/greeting_bg_clipper.dart';
+import 'package:frontend/common/view/onion_dome_clipper.dart';
 import 'package:frontend/constants/assets.dart';
 import 'package:frontend/features/auth/view/login_dialog.dart';
 import 'package:frontend/features/auth/view/sign_up_dialog.dart';
@@ -30,7 +30,7 @@ class AuthenticationScreen extends StatelessWidget {
 
           // Golden border
           ClipPath(
-            clipper: GreetingBGShape(),
+            clipper: OnionDomeClipper(),
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -48,7 +48,7 @@ class AuthenticationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 // White container
                 child: ClipPath(
-                  clipper: GreetingBGShape(),
+                  clipper: OnionDomeClipper(),
                   child: Container(
                     alignment: Alignment.center,
                     width: double.infinity,

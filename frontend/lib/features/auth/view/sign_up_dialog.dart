@@ -33,18 +33,6 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
   Widget build(BuildContext context) {
     final isRegistering = ref.watch(authenticationProvider).isLoading;
 
-    ref.listen(authenticationProvider, (oldState, newState) {
-      if (oldState is AsyncLoading &&
-          newState is AsyncData &&
-          newState.valueOrNull == null) {
-        context
-          ..pop<void>()
-          ..showSnackbar(
-            '✅ Registration successful! Please log in to continue.',
-          );
-      }
-    });
-
     return AlertDialog(
       backgroundColor: appColors.accent,
       title: Row(
@@ -190,9 +178,11 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
                 enabled: !isRegistering,
                 text: 'Submit',
                 backgroundColor: appColors.primaryDark,
-                onTap: () {
+                onTap: () async {
                   if (formKey.currentState?.validate() ?? false) {
-                    ref.read(authenticationProvider.notifier).registerUser(
+                    await ref
+                        .read(authenticationProvider.notifier)
+                        .registerUser(
                           RegisterRequest(
                             firstName: nameController.text.trim(),
                             email: emailController.text.trim(),
@@ -201,7 +191,16 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
                             imageBytes: imageBytes,
                           ),
                         );
-                  } else {}
+
+                    if (ref.read(authenticationProvider).hasValue) {
+                      context
+                        ..pop<void>()
+                        ..showSnackbar(
+                          '✅ Registration successful! Please log in to '
+                          'continue.',
+                        );
+                    }
+                  }
                 },
               ),
             ],
