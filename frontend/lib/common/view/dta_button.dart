@@ -10,6 +10,10 @@ class DTAButton extends StatelessWidget {
     this.onTap,
     this.backgroundColor,
     this.enabled = true,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 56,
+      vertical: 9,
+    ),
   })  : filled = true,
         borderColor = null;
 
@@ -19,6 +23,10 @@ class DTAButton extends StatelessWidget {
     this.onTap,
     this.borderColor,
     this.enabled = true,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 56,
+      vertical: 9,
+    ),
   })  : filled = false,
         backgroundColor = null;
 
@@ -28,6 +36,7 @@ class DTAButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? borderColor;
   final bool enabled;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +60,7 @@ class DTAButton extends StatelessWidget {
                 ? (backgroundColor ?? appColors.accent)
                 : Colors.transparent,
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 56, vertical: 9),
+          padding: padding,
           child: Text(
             text,
             style: TextStyle(
@@ -59,6 +68,8 @@ class DTAButton extends StatelessWidget {
               fontFamily: Constants.fontDMSerifDisplay,
               fontSize: 16,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),

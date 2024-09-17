@@ -16,11 +16,21 @@ class Assets {
 
   static const String iconsBxMenu = "assets/icons/bx_menu.svg";
 
+  static const String iconsCalendar = "assets/icons/calendar.svg";
+
+  static const String iconsChatBubble = "assets/icons/chat_bubble.svg";
+
+  static const String iconsMoney = "assets/icons/money.svg";
+
   static const String iconsOcticonPerson = "assets/icons/octicon_person.svg";
 
   static const String imagesAuthBg = "assets/images/auth_bg.webp";
 
   static const String imagesAuthBgBorder = "assets/images/auth_bg_border.webp";
+
+  static const String imagesAvatarWoman = "assets/images/avatar_woman.webp";
+
+  static const String imagesFloralBg = "assets/images/floral_bg.png";
 
   static const String imagesFlowers = "assets/images/flowers.webp";
 }

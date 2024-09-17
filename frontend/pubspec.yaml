@@ -18,6 +18,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_riverpod: ^2.5.1
   flutter_svg: ^2.0.10+1
+  intl: ^0.19.0
   json_annotation: ^4.9.0
   logger: ^2.4.0
   pretty_dio_logger: ^1.4.0
@@ -47,14 +48,22 @@ flutter:
     - family: DMSerifDisplay
       fonts:
         - asset: assets/fonts/DMSerifDisplay-Regular.ttf
-    - family: KantumruyPro
+    - family: Kantumruy
       fonts:
-        - asset: assets/fonts/KantumruyPro-Regular.ttf
-        - asset: assets/fonts/KantumruyPro-Bold.ttf
+        - asset: assets/fonts/Kantumruy-Regular.ttf
+        - asset: assets/fonts/Kantumruy-Bold.ttf
           weight: 700
+        - asset: assets/fonts/Kantumruy-Light.ttf
+          weight: 300
     - family: Krylon
       fonts:
         - asset: assets/fonts/Krylon-Regular.otf
+    - family: Comforter
+      fonts:
+        - asset: assets/fonts/Comforter-Regular.ttf
+    - family: Calibri
+      fonts:
+        - asset: assets/fonts/calibri_regular.ttf
 
 flutter_assets:
   assets_path:

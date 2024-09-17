@@ -17,6 +17,15 @@ import 'package:frontend/utils/constants.dart';
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
+  static const _appBarPadding =
+      EdgeInsets.symmetric(horizontal: 20, vertical: 24);
+
+  static Size appBarSize(BuildContext context) => Size(
+        context.width,
+        // AppBar (content + padding) height
+        36 + _appBarPadding.vertical,
+      );
+
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();
 }
@@ -34,9 +43,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size(context.width, 36 + (28 * 2)),
+        preferredSize: MainScreen.appBarSize(context),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
+          padding: MainScreen._appBarPadding,
           child: Stack(
             children: [
               Align(
@@ -51,6 +60,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       animation: primaryAnimation,
                       secondaryAnimation: secondaryAnimation,
                       transitionType: SharedAxisTransitionType.vertical,
+                      fillColor: Colors.transparent,
                       child: child,
                     );
                   },
@@ -119,13 +129,24 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(
-          _BottomNavItem.bottomNavBarHorizontalPadding,
+        padding: EdgeInsets.only(
+          left: _BottomNavItem.bottomNavBarHorizontalPadding,
+          right: _BottomNavItem.bottomNavBarHorizontalPadding,
+          bottom: context.mqViewPadding.bottom == 0
+              ? _BottomNavItem.bottomNavBarHorizontalPadding
+              : context.mqViewPadding.bottom,
         ),
         child: Container(
           decoration: BoxDecoration(
             color: appColors.surface,
             borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: appColors.secondaryDark.withOpacity(0.25),
+                blurRadius: 15,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -234,7 +255,7 @@ class _BottomNavItem extends StatelessWidget {
                 style: context.bodyLarge?.copyWith(
                   color: color,
                   fontSize: 12,
-                  fontFamily: Constants.fontKantumuryPro,
+                  fontFamily: Constants.fontKantumruy,
                   fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
