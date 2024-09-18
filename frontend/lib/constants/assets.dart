@@ -20,9 +20,15 @@ class Assets {
 
   static const String iconsChatBubble = "assets/icons/chat_bubble.svg";
 
+  static const String iconsCheck = "assets/icons/check.svg";
+
+  static const String iconsDecoration = "assets/icons/decoration.svg";
+
   static const String iconsMoney = "assets/icons/money.svg";
 
   static const String iconsOcticonPerson = "assets/icons/octicon_person.svg";
+
+  static const String iconsWarning = "assets/icons/warning.svg";
 
   static const String imagesAuthBg = "assets/images/auth_bg.webp";
 

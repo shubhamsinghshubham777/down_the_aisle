@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/common/view/custom_package_advertisement.dart';
+import 'package:frontend/common/view/dta_horizontal_list.dart';
 import 'package:frontend/constants/assets.dart';
+import 'package:frontend/features/home/model/dta_horizontal_list_data.dart';
 import 'package:frontend/features/home/view/setup_profile_section.dart';
 import 'package:frontend/features/home/view/task_quick_details_card.dart';
 import 'package:frontend/features/home/view/upcoming_task_card.dart';
+import 'package:frontend/features/main/view/main_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -28,7 +32,7 @@ class HomeScreen extends ConsumerWidget {
                 itemCount: 3,
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.only(left: 20, right: 4),
-                itemBuilder: (listContext, index) {
+                itemBuilder: (_, index) {
                   return TaskQuickDetailsCard(
                     key: Key(index.toString()),
                     dateTime: DateTime.now(),
@@ -57,9 +61,80 @@ class HomeScreen extends ConsumerWidget {
                 },
               ),
             ),
+            DTAHorizontalList(
+              title: 'Tasks',
+              items: [
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Food Menu',
+                  isCompleted: false,
+                  onTap: () {},
+                ),
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Guest List',
+                  isCompleted: true,
+                  onTap: () {},
+                ),
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Vendor',
+                  isCompleted: false,
+                  onTap: () {},
+                ),
+              ],
+            ),
+            DTAHorizontalList(
+              title: 'Vendors',
+              itemSize: DTAHorizontalListItemSize.small,
+              items: [
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Decor',
+                  onTap: () {},
+                ),
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Makeup',
+                  onTap: () {},
+                ),
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Caterer',
+                  onTap: () {},
+                ),
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  itemTitle: 'Clothing',
+                  onTap: () {},
+                ),
+              ],
+            ),
+            const CustomPackageAdvertisement(),
+            DTAHorizontalList(
+              title: 'Trending Today',
+              tags: const ['#goldlehnga'],
+              itemSize: DTAHorizontalListItemSize.large,
+              items: [
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  onTap: () {},
+                ),
+                DTAHorizontalListData(
+                  imageUrl: _fakeTaskImage,
+                  onTap: () {},
+                ),
+              ],
+            ),
+            SizedBox(
+              height: MainScreen.bottomNavBarHeight(context),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+const _fakeTaskImage =
+    'https://media.istockphoto.com/id/1290444763/photo/assorted-of-indian-dish-with-curry-dish-naan-chicken.jpg?s=612x612&w=0&k=20&c=5q09leP6_QnvdUEfsB6KUXDTTBJtl88bEwrDfRVNA0U=';

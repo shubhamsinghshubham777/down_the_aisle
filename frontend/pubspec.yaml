@@ -9,6 +9,7 @@ environment:
 dependencies:
   animations: ^2.0.11
   awesome_extensions: ^2.0.17
+  cached_network_image: ^3.4.1
   core:
     path: ../core
   dio: ^5.7.0

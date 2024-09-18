@@ -7,7 +7,7 @@ class ZoomTapAnimation extends StatefulWidget {
     super.key,
     this.onTap,
     this.begin = 1.0,
-    this.end = 0.9,
+    this.end = 0.95,
     this.beginDuration = const Duration(milliseconds: 100),
     this.endDuration = const Duration(seconds: 1),
     this.longTapRepeatDuration = const Duration(milliseconds: 100),

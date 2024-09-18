@@ -17,14 +17,33 @@ import 'package:frontend/utils/constants.dart';
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
-  static const _appBarPadding =
-      EdgeInsets.symmetric(horizontal: 20, vertical: 24);
-
   static Size appBarSize(BuildContext context) => Size(
         context.width,
         // AppBar (content + padding) height
         36 + _appBarPadding.vertical,
       );
+
+  static double bottomNavBarHeight(
+    BuildContext context, {
+    bool addExtraSpace = true,
+  }) {
+    return 74 +
+        _bottomNavBarPadding(context).vertical +
+        (addExtraSpace ? 24 : 0);
+  }
+
+  static const _appBarPadding =
+      EdgeInsets.symmetric(horizontal: 20, vertical: 24);
+
+  static EdgeInsets _bottomNavBarPadding(BuildContext context) {
+    return EdgeInsets.only(
+      left: _BottomNavItem.bottomNavBarHorizontalPadding,
+      right: _BottomNavItem.bottomNavBarHorizontalPadding,
+      bottom: context.mqViewPadding.bottom == 0
+          ? _BottomNavItem.bottomNavBarHorizontalPadding
+          : context.mqViewPadding.bottom,
+    );
+  }
 
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();
@@ -128,61 +147,61 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-          left: _BottomNavItem.bottomNavBarHorizontalPadding,
-          right: _BottomNavItem.bottomNavBarHorizontalPadding,
-          bottom: context.mqViewPadding.bottom == 0
-              ? _BottomNavItem.bottomNavBarHorizontalPadding
-              : context.mqViewPadding.bottom,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: appColors.surface,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: appColors.secondaryDark.withOpacity(0.25),
-                blurRadius: 15,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _BottomNavItem(
-                asset: Assets.iconsBottomNavHome,
-                label: 'Home',
-                selected: selectedScreen == MainScreenType.home,
-                onTap: () => screenChanger.changeScreen(MainScreenType.home),
-              ),
-              _BottomNavItem(
-                asset: Assets.iconsBottomNavDash,
-                label: 'Dashboard',
-                selected: selectedScreen == MainScreenType.dashboard,
-                onTap: () =>
-                    screenChanger.changeScreen(MainScreenType.dashboard),
-              ),
-              _BottomNavItem(
-                asset: Assets.iconsBottomNavInspire,
-                label: 'Inspire',
-                selected: selectedScreen == MainScreenType.inspire,
-                onTap: () => screenChanger.changeScreen(MainScreenType.inspire),
-              ),
-              _BottomNavItem(
-                asset: Assets.iconsBottomNavVendors,
-                label: 'Vendors',
-                selected: selectedScreen == MainScreenType.vendors,
-                onTap: () => screenChanger.changeScreen(MainScreenType.vendors),
-              ),
-              _BottomNavItem(
-                asset: Assets.iconsBottomNavCollab,
-                label: 'Collab',
-                selected: selectedScreen == MainScreenType.collab,
-                onTap: () => screenChanger.changeScreen(MainScreenType.collab),
-              ),
-            ],
+      bottomNavigationBar: SizedBox(
+        height: MainScreen.bottomNavBarHeight(context, addExtraSpace: false),
+        child: Padding(
+          padding: MainScreen._bottomNavBarPadding(context),
+          child: Container(
+            decoration: BoxDecoration(
+              color: appColors.surface,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: appColors.secondaryDark.withOpacity(0.25),
+                  blurRadius: 15,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _BottomNavItem(
+                  asset: Assets.iconsBottomNavHome,
+                  label: 'Home',
+                  selected: selectedScreen == MainScreenType.home,
+                  onTap: () => screenChanger.changeScreen(MainScreenType.home),
+                ),
+                _BottomNavItem(
+                  asset: Assets.iconsBottomNavDash,
+                  label: 'Dashboard',
+                  selected: selectedScreen == MainScreenType.dashboard,
+                  onTap: () =>
+                      screenChanger.changeScreen(MainScreenType.dashboard),
+                ),
+                _BottomNavItem(
+                  asset: Assets.iconsBottomNavInspire,
+                  label: 'Inspire',
+                  selected: selectedScreen == MainScreenType.inspire,
+                  onTap: () =>
+                      screenChanger.changeScreen(MainScreenType.inspire),
+                ),
+                _BottomNavItem(
+                  asset: Assets.iconsBottomNavVendors,
+                  label: 'Vendors',
+                  selected: selectedScreen == MainScreenType.vendors,
+                  onTap: () =>
+                      screenChanger.changeScreen(MainScreenType.vendors),
+                ),
+                _BottomNavItem(
+                  asset: Assets.iconsBottomNavCollab,
+                  label: 'Collab',
+                  selected: selectedScreen == MainScreenType.collab,
+                  onTap: () =>
+                      screenChanger.changeScreen(MainScreenType.collab),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -197,12 +216,18 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             child: child,
           );
         },
+        // `PageStorageKey` is needed to persist screen state between animations
         child: switch (selectedScreen) {
-          MainScreenType.home => const HomeScreen(),
-          MainScreenType.dashboard => const DashboardScreen(),
-          MainScreenType.inspire => const InspireScreen(),
-          MainScreenType.vendors => const VendorsScreen(),
-          MainScreenType.collab => const CollabScreen(),
+          MainScreenType.home =>
+            const HomeScreen(key: PageStorageKey('home_screen')),
+          MainScreenType.dashboard =>
+            const DashboardScreen(key: PageStorageKey('dashboard_screen')),
+          MainScreenType.inspire =>
+            const InspireScreen(key: PageStorageKey('inspire_screen')),
+          MainScreenType.vendors =>
+            const VendorsScreen(key: PageStorageKey('vendors_screen')),
+          MainScreenType.collab =>
+            const CollabScreen(key: PageStorageKey('collab_screen')),
         },
       ),
     );
