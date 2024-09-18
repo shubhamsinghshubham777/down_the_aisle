@@ -12,11 +12,11 @@ abstract class AuthService {
   factory AuthService(Dio dio, {String? baseUrl}) = _AuthService;
 
   @POST('/auth/login')
-  Future<Tokens> loginUser(@Body() LoginRequest request);
+  Future<HttpResponse<Tokens>> loginUser(@Body() LoginRequest request);
 
   @POST('/auth/register')
-  Future<String> registerUser(@Body() RegisterRequest request);
+  Future<HttpResponse<String>> registerUser(@Body() RegisterRequest request);
 
   @GET('/user/profile')
-  Future<DTAUser> getUserProfile();
+  Future<HttpResponse<DTAUser>> getUserProfile();
 }

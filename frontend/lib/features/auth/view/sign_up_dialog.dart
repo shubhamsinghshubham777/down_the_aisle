@@ -1,9 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:core/models/auth/dta_user.dart';
 import 'package:core/models/auth/register_request.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_button.dart';
@@ -26,57 +24,21 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
-  Uint8List? imageBytes;
   Gender gender = Gender.male;
 
   @override
   Widget build(BuildContext context) {
-    final isRegistering = ref.watch(authenticationProvider).isLoading;
+    final registerState = ref.watch(authenticationProvider);
 
     return AlertDialog(
       backgroundColor: appColors.accent,
-      title: Row(
-        children: [
-          Expanded(
-            child: Text(
-              'Sign Up',
-              style: TextStyle(
-                color: appColors.surface,
-                fontSize: 40,
-                fontFamily: Constants.fontDMSerifDisplay,
-              ),
-            ),
-          ),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              CircleAvatar(
-                radius: 32,
-                backgroundImage:
-                    imageBytes != null ? MemoryImage(imageBytes!) : null,
-                backgroundColor: appColors.surface,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: appColors.accent.withOpacity(0.35),
-                ),
-                child: IconButton(
-                  onPressed: selectImage,
-                  icon: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Icon(
-                      Icons.photo,
-                      size: 32,
-                      color: appColors.surface,
-                    ),
-                  ),
-                  tooltip: 'Select profile image',
-                ),
-              ),
-            ],
-          ),
-        ],
+      title: Text(
+        'Sign Up',
+        style: TextStyle(
+          color: appColors.surface,
+          fontSize: 40,
+          fontFamily: Constants.fontDMSerifDisplay,
+        ),
       ),
       content: SingleChildScrollView(
         child: Form(
@@ -173,9 +135,22 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
                   return null;
                 },
               ),
-              const SizedBox(height: 24),
+              if (registerState.hasError)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    registerState.error?.toString() ??
+                        'Unexpected error occurred! Please try again later.',
+                    style: context.labelSmall?.copyWith(
+                      color: appColors.primaryMedium,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                )
+              else
+                const SizedBox(height: 24),
               DTAButton.filled(
-                enabled: !isRegistering,
+                enabled: !registerState.isLoading,
                 text: 'Submit',
                 backgroundColor: appColors.primaryDark,
                 onTap: () async {
@@ -188,11 +163,11 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
                             email: emailController.text.trim(),
                             gender: gender,
                             password: passwordController.text.trim(),
-                            imageBytes: imageBytes,
                           ),
                         );
 
-                    if (ref.read(authenticationProvider).hasValue) {
+                    final registerState = ref.read(authenticationProvider);
+                    if (!registerState.hasError) {
                       context
                         ..pop<void>()
                         ..showSnackbar(
@@ -208,17 +183,6 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
         ),
       ),
     );
-  }
-
-  Future<void> selectImage() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'png'],
-      withData: true,
-    );
-    if (result != null) {
-      setState(() => imageBytes = result.files.first.bytes);
-    }
   }
 }
 

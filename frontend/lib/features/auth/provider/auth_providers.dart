@@ -24,7 +24,9 @@ class Authentication extends _$Authentication {
   @override
   FutureOr<DTAUser?> build() async {
     try {
-      return await _authService.getUserProfile();
+      final response = await _authService.getUserProfile();
+      if (response.hasError) throw Exception(response.errorMessage);
+      return response.data;
     } catch (e, st) {
       debugLog(e, stackTrace: st, tag: _tag);
       return null;
@@ -34,20 +36,39 @@ class Authentication extends _$Authentication {
   Future<void> loginUser(LoginRequest request) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      final tokens = await _authService.loginUser(request);
+      final response = await _authService.loginUser(request);
+      if (response.hasError) throw Exception(response.errorMessage);
+      final tokens = response.data;
       final prefs = await _sharedPrefs;
       await Future.wait([
         prefs.setAccessToken(tokens.accessToken),
         prefs.setRefreshToken(tokens.refreshToken),
       ]);
-      return _authService.getUserProfile();
+      final profileResponse = await _authService.getUserProfile();
+      if (profileResponse.hasError) {
+        throw Exception(profileResponse.errorMessage);
+      }
+      return profileResponse.data;
     });
   }
 
   Future<void> registerUser(RegisterRequest request) async {
     state = const AsyncLoading();
-    await _authService.registerUser(request);
-    state = const AsyncData(null);
+    try {
+      final response = await _authService.registerUser(request);
+      if (response.hasError) {
+        state = AsyncError(
+          Exception(response.errorMessage),
+          StackTrace.current,
+        );
+      }
+      state = const AsyncData(null);
+    } catch (e) {
+      state = AsyncError(
+        e.dioHandledError,
+        StackTrace.current,
+      );
+    }
   }
 }
 

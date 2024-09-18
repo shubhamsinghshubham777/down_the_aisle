@@ -1,7 +1,25 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/common/view/app_colors.dart';
+import 'package:retrofit/retrofit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+extension ObjectX on Object {
+  Object get dioHandledError => this is DioException
+      ? (this as DioException).response?.errorMessage ?? 'Unexpected error!'
+      : this;
+}
+
+extension HttpResponseX<T> on HttpResponse<T> {
+  bool get hasError => response.hasError;
+  String? get errorMessage => response.errorMessage;
+}
+
+extension ResponseX<T> on Response<T> {
+  bool get hasError => (statusCode ?? 0) >= 400;
+  String? get errorMessage => data as String?;
+}
 
 extension BuildContextX on BuildContext {
   void showSnackbar(String message) {

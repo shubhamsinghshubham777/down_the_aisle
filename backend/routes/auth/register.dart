@@ -49,7 +49,6 @@ Future<Response> onRequest(RequestContext context) async {
       hashedPassword: hashedPassword,
       gender: registerRequest.gender,
       passwordSalt: passwordSalt,
-      imageBytes: registerRequest.imageBytes,
     ),
   );
 
