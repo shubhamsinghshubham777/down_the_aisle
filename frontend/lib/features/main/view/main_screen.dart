@@ -1,5 +1,5 @@
-import 'package:animations/animations.dart';
 import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:easy_animated_indexed_stack/easy_animated_indexed_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,12 +17,6 @@ import 'package:frontend/utils/constants.dart';
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
-  static Size appBarSize(BuildContext context) => Size(
-        context.width,
-        // AppBar (content + padding) height
-        36 + _appBarPadding.vertical,
-      );
-
   static double bottomNavBarHeight(
     BuildContext context, {
     bool addExtraSpace = true,
@@ -31,9 +25,6 @@ class MainScreen extends ConsumerStatefulWidget {
         _bottomNavBarPadding(context).vertical +
         (addExtraSpace ? 24 : 0);
   }
-
-  static const _appBarPadding =
-      EdgeInsets.symmetric(horizontal: 20, vertical: 24);
 
   static EdgeInsets _bottomNavBarPadding(BuildContext context) {
     return EdgeInsets.only(
@@ -51,184 +42,98 @@ class MainScreen extends ConsumerStatefulWidget {
 
 class _MainScreenState extends ConsumerState<MainScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  late final screenChanger = ref.read(mainSelectedScreenTypeProvider.notifier);
 
   @override
   Widget build(BuildContext context) {
     final selectedScreen = ref.watch(mainSelectedScreenTypeProvider);
-    final screenChanger = ref.watch(mainSelectedScreenTypeProvider.notifier);
 
     return Scaffold(
       key: _scaffoldKey,
       extendBody: true,
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: MainScreen.appBarSize(context),
-        child: Padding(
-          padding: MainScreen._appBarPadding,
-          child: Stack(
+      drawer: const Drawer(),
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          EasyAnimatedIndexedStack(
+            index: selectedScreen.index,
             children: [
-              Align(
-                child: PageTransitionSwitcher(
-                  duration: _pageTransitionDuration,
-                  transitionBuilder: (
-                    child,
-                    primaryAnimation,
-                    secondaryAnimation,
-                  ) {
-                    return SharedAxisTransition(
-                      animation: primaryAnimation,
-                      secondaryAnimation: secondaryAnimation,
-                      transitionType: SharedAxisTransitionType.vertical,
-                      fillColor: Colors.transparent,
-                      child: child,
-                    );
-                  },
-                  child: Text(
-                    switch (selectedScreen) {
-                      MainScreenType.home => 'Welcome',
-                      MainScreenType.dashboard => 'Dashboard',
-                      MainScreenType.inspire => 'Inspirations',
-                      MainScreenType.vendors => 'Vendors',
-                      MainScreenType.collab => 'Collab',
-                    },
-                    key: Key(selectedScreen.name),
-                    style: context.bodyLarge?.copyWith(
-                      fontFamily: Constants.fontDMSerifDisplay,
+              HomeScreen(onDrawerOpen: _scaffoldKey.currentState?.openDrawer),
+              const DashboardScreen(),
+              const InspireScreen(),
+              const VendorsScreen(),
+              const CollabScreen(),
+            ],
+          ),
+          SizedBox(
+            height: MainScreen.bottomNavBarHeight(
+              context,
+              addExtraSpace: false,
+            ),
+            child: Padding(
+              padding: MainScreen._bottomNavBarPadding(context),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: appColors.surface,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: appColors.secondaryDark.withOpacity(0.25),
+                      blurRadius: 15,
+                      offset: const Offset(0, 8),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: ZoomTapAnimation(
-                  onTap: () => _scaffoldKey.currentState?.openDrawer(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: appColors.surface,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: const Offset(0, 5),
-                          blurRadius: 20,
-                          color: appColors.accent.withOpacity(0.15),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 4,
-                        top: 5,
-                        right: 4,
-                        bottom: 3,
-                      ),
-                      child: SvgPicture.asset(Assets.iconsBxMenu),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ZoomTapAnimation(
-                      onTap: () {},
-                      child: SvgPicture.asset(Assets.iconsBiBell),
+                    _BottomNavItem(
+                      asset: Assets.iconsBottomNavHome,
+                      label: 'Home',
+                      selected: selectedScreen == MainScreenType.home,
+                      onTap: () => screenChanger.changeScreen(
+                        MainScreenType.home,
+                      ),
                     ),
-                    const SizedBox(width: 20),
-                    ZoomTapAnimation(
-                      onTap: () {},
-                      child: SvgPicture.asset(Assets.iconsOcticonPerson),
+                    _BottomNavItem(
+                      asset: Assets.iconsBottomNavDash,
+                      label: 'Dashboard',
+                      selected: selectedScreen == MainScreenType.dashboard,
+                      onTap: () => screenChanger.changeScreen(
+                        MainScreenType.dashboard,
+                      ),
+                    ),
+                    _BottomNavItem(
+                      asset: Assets.iconsBottomNavInspire,
+                      label: 'Inspire',
+                      selected: selectedScreen == MainScreenType.inspire,
+                      onTap: () => screenChanger.changeScreen(
+                        MainScreenType.inspire,
+                      ),
+                    ),
+                    _BottomNavItem(
+                      asset: Assets.iconsBottomNavVendors,
+                      label: 'Vendors',
+                      selected: selectedScreen == MainScreenType.vendors,
+                      onTap: () => screenChanger.changeScreen(
+                        MainScreenType.vendors,
+                      ),
+                    ),
+                    _BottomNavItem(
+                      asset: Assets.iconsBottomNavCollab,
+                      label: 'Collab',
+                      selected: selectedScreen == MainScreenType.collab,
+                      onTap: () => screenChanger.changeScreen(
+                        MainScreenType.collab,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: SizedBox(
-        height: MainScreen.bottomNavBarHeight(context, addExtraSpace: false),
-        child: Padding(
-          padding: MainScreen._bottomNavBarPadding(context),
-          child: Container(
-            decoration: BoxDecoration(
-              color: appColors.surface,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: appColors.secondaryDark.withOpacity(0.25),
-                  blurRadius: 15,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _BottomNavItem(
-                  asset: Assets.iconsBottomNavHome,
-                  label: 'Home',
-                  selected: selectedScreen == MainScreenType.home,
-                  onTap: () => screenChanger.changeScreen(MainScreenType.home),
-                ),
-                _BottomNavItem(
-                  asset: Assets.iconsBottomNavDash,
-                  label: 'Dashboard',
-                  selected: selectedScreen == MainScreenType.dashboard,
-                  onTap: () =>
-                      screenChanger.changeScreen(MainScreenType.dashboard),
-                ),
-                _BottomNavItem(
-                  asset: Assets.iconsBottomNavInspire,
-                  label: 'Inspire',
-                  selected: selectedScreen == MainScreenType.inspire,
-                  onTap: () =>
-                      screenChanger.changeScreen(MainScreenType.inspire),
-                ),
-                _BottomNavItem(
-                  asset: Assets.iconsBottomNavVendors,
-                  label: 'Vendors',
-                  selected: selectedScreen == MainScreenType.vendors,
-                  onTap: () =>
-                      screenChanger.changeScreen(MainScreenType.vendors),
-                ),
-                _BottomNavItem(
-                  asset: Assets.iconsBottomNavCollab,
-                  label: 'Collab',
-                  selected: selectedScreen == MainScreenType.collab,
-                  onTap: () =>
-                      screenChanger.changeScreen(MainScreenType.collab),
-                ),
-              ],
             ),
           ),
-        ),
-      ),
-      drawer: const Drawer(),
-      body: PageTransitionSwitcher(
-        duration: _pageTransitionDuration,
-        transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-          return SharedAxisTransition(
-            animation: primaryAnimation,
-            secondaryAnimation: secondaryAnimation,
-            transitionType: SharedAxisTransitionType.vertical,
-            child: child,
-          );
-        },
-        // `PageStorageKey` is needed to persist screen state between animations
-        child: switch (selectedScreen) {
-          MainScreenType.home =>
-            const HomeScreen(key: PageStorageKey('home_screen')),
-          MainScreenType.dashboard =>
-            const DashboardScreen(key: PageStorageKey('dashboard_screen')),
-          MainScreenType.inspire =>
-            const InspireScreen(key: PageStorageKey('inspire_screen')),
-          MainScreenType.vendors =>
-            const VendorsScreen(key: PageStorageKey('vendors_screen')),
-          MainScreenType.collab =>
-            const CollabScreen(key: PageStorageKey('collab_screen')),
-        },
+        ],
       ),
     );
   }
@@ -291,5 +196,3 @@ class _BottomNavItem extends StatelessWidget {
     );
   }
 }
-
-final _pageTransitionDuration = 600.milliseconds;

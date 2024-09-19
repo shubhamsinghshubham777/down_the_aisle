@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/common/view/custom_package_advertisement.dart';
+import 'package:frontend/common/view/dta_app_bar.dart';
 import 'package:frontend/common/view/dta_horizontal_list.dart';
 import 'package:frontend/constants/assets.dart';
 import 'package:frontend/features/home/model/dta_horizontal_list_data.dart';
@@ -10,7 +11,12 @@ import 'package:frontend/features/home/view/upcoming_task_card.dart';
 import 'package:frontend/features/main/view/main_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+    this.onDrawerOpen,
+  });
+
+  final VoidCallback? onDrawerOpen;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +25,12 @@ class HomeScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SetupProfileSection(),
+            Stack(
+              children: [
+                const SetupProfileSection(),
+                DTAAppBar(onDrawerOpen: onDrawerOpen),
+              ],
+            ),
             const SizedBox(height: 12),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),

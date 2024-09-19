@@ -13,6 +13,7 @@ dependencies:
   core:
     path: ../core
   dio: ^5.7.0
+  easy_animated_indexed_stack: ^0.0.2
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.1.0

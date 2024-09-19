@@ -1,0 +1,95 @@
+import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:frontend/common/view/app_colors.dart';
+import 'package:frontend/common/view/zoom_tap_animation.dart';
+import 'package:frontend/constants/assets.dart';
+import 'package:frontend/utils/constants.dart';
+
+class DTAAppBar extends StatelessWidget {
+  const DTAAppBar({super.key, this.onDrawerOpen});
+
+  final VoidCallback? onDrawerOpen;
+
+  static Size appBarSize(BuildContext context) => Size(
+        context.width,
+        // AppBar (content + padding) height
+        36 + _appBarPadding(context).vertical,
+      );
+
+  static EdgeInsets _appBarPadding(BuildContext context) {
+    return EdgeInsets.only(
+      left: 20,
+      top: 24 + context.mqViewPadding.top,
+      right: 20,
+      bottom: 24,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.fromSize(
+      size: DTAAppBar.appBarSize(context),
+      child: Padding(
+        padding: DTAAppBar._appBarPadding(context),
+        child: Stack(
+          children: [
+            Align(
+              child: Text(
+                'Welcome',
+                style: context.bodyLarge?.copyWith(
+                  fontFamily: Constants.fontDMSerifDisplay,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ZoomTapAnimation(
+                onTap: onDrawerOpen,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: appColors.surface,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 5),
+                        blurRadius: 20,
+                        color: appColors.accent.withOpacity(0.15),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 4,
+                      top: 5,
+                      right: 4,
+                      bottom: 3,
+                    ),
+                    child: SvgPicture.asset(Assets.iconsBxMenu),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ZoomTapAnimation(
+                    onTap: () {},
+                    child: SvgPicture.asset(Assets.iconsBiBell),
+                  ),
+                  const SizedBox(width: 20),
+                  ZoomTapAnimation(
+                    onTap: () {},
+                    child: SvgPicture.asset(Assets.iconsOcticonPerson),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

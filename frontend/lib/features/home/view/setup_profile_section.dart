@@ -1,10 +1,10 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/common/view/app_colors.dart';
+import 'package:frontend/common/view/dta_app_bar.dart';
 import 'package:frontend/common/view/dta_button.dart';
 import 'package:frontend/common/view/half_onion_dome_container.dart';
 import 'package:frontend/constants/assets.dart';
-import 'package:frontend/features/main/view/main_screen.dart';
 import 'package:frontend/utils/constants.dart';
 
 class SetupProfileSection extends StatelessWidget {
@@ -31,7 +31,7 @@ class SetupProfileSection extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               left: 24,
-              top: MainScreen.appBarSize(context).height,
+              top: DTAAppBar.appBarSize(context).height,
             ),
             child: FractionallySizedBox(
               widthFactor: 0.5,
