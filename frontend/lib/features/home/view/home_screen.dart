@@ -21,14 +21,16 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
                 const SetupProfileSection(),
-                DTAAppBar(onDrawerOpen: onDrawerOpen),
+                DTAAppBar(
+                  title: 'Welcome',
+                  onDrawerOpen: onDrawerOpen,
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -76,19 +78,19 @@ class HomeScreen extends ConsumerWidget {
               title: 'Tasks',
               items: [
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Food Menu',
                   isCompleted: false,
                   onTap: () {},
                 ),
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Guest List',
                   isCompleted: true,
                   onTap: () {},
                 ),
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Vendor',
                   isCompleted: false,
                   onTap: () {},
@@ -100,22 +102,22 @@ class HomeScreen extends ConsumerWidget {
               itemSize: DTAHorizontalListItemSize.small,
               items: [
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Decor',
                   onTap: () {},
                 ),
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Makeup',
                   onTap: () {},
                 ),
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Caterer',
                   onTap: () {},
                 ),
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   itemTitle: 'Clothing',
                   onTap: () {},
                 ),
@@ -128,18 +130,16 @@ class HomeScreen extends ConsumerWidget {
               itemSize: DTAHorizontalListItemSize.large,
               items: [
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   onTap: () {},
                 ),
                 DTAHorizontalListData(
-                  imageUrl: _fakeTaskImage,
+                  imageUrl: fakeTaskImage,
                   onTap: () {},
                 ),
               ],
             ),
-            SizedBox(
-              height: MainScreen.bottomNavBarHeight(context),
-            ),
+            SizedBox(height: MainScreen.bottomNavBarHeight(context)),
           ],
         ),
       ),
@@ -147,5 +147,5 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-const _fakeTaskImage =
+const fakeTaskImage =
     'https://media.istockphoto.com/id/1290444763/photo/assorted-of-indian-dish-with-curry-dish-naan-chicken.jpg?s=612x612&w=0&k=20&c=5q09leP6_QnvdUEfsB6KUXDTTBJtl88bEwrDfRVNA0U=';

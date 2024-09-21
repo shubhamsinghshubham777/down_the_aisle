@@ -65,6 +65,10 @@ class _AppState extends ConsumerState<App> {
           selectionColor: appColors.secondaryMedium,
           selectionHandleColor: appColors.secondaryMedium,
         ),
+        colorScheme: ColorScheme.light(
+          surface: appColors.surface,
+          onSurface: appColors.secondaryDark,
+        ),
       ),
       home: PageTransitionSwitcher(
         duration: 3.seconds,

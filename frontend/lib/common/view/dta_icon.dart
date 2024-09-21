@@ -21,7 +21,7 @@ class DtaIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ZoomTapAnimation(
+    return ZoomTapDetector(
       onTap: onTap,
       child: SvgPicture.asset(
         asset,

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 
-class ZoomTapAnimation extends StatefulWidget {
-  const ZoomTapAnimation({
+class ZoomTapDetector extends StatefulWidget {
+  const ZoomTapDetector({
     required this.child,
     super.key,
     this.onTap,
@@ -50,11 +50,11 @@ class ZoomTapAnimation extends StatefulWidget {
   // behavior: the hit test behavior of the GestureDetector.
   final HitTestBehavior behavior;
   @override
-  State<StatefulWidget> createState() => _ZoomTapAnimationState();
+  State<StatefulWidget> createState() => _ZoomTapDetectorState();
 }
 
-class _ZoomTapAnimationState extends State<ZoomTapAnimation>
-    with SingleTickerProviderStateMixin<ZoomTapAnimation> {
+class _ZoomTapDetectorState extends State<ZoomTapDetector>
+    with SingleTickerProviderStateMixin<ZoomTapDetector> {
   // make AnimationController nullable to make sure to not use it if it's null
   AnimationController? _controller;
   late Animation<double> _animation;

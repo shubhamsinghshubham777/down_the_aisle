@@ -40,7 +40,7 @@ class DTAButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ZoomTapAnimation(
+    return ZoomTapDetector(
       onTap: enabled ? onTap : null,
       child: AnimatedOpacity(
         duration: Durations.short4,

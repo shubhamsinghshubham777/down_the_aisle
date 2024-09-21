@@ -42,7 +42,6 @@ class SetupProfileSection extends StatelessWidget {
                   Text(
                     'Hello, Divya!',
                     style: context.displaySmall?.copyWith(
-                      color: appColors.secondaryDark,
                       fontFamily: Constants.fontComforter,
                     ),
                     maxLines: 2,

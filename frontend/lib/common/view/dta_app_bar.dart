@@ -7,8 +7,13 @@ import 'package:frontend/constants/assets.dart';
 import 'package:frontend/utils/constants.dart';
 
 class DTAAppBar extends StatelessWidget {
-  const DTAAppBar({super.key, this.onDrawerOpen});
+  const DTAAppBar({
+    required this.title,
+    super.key,
+    this.onDrawerOpen,
+  });
 
+  final String title;
   final VoidCallback? onDrawerOpen;
 
   static Size appBarSize(BuildContext context) => Size(
@@ -36,7 +41,7 @@ class DTAAppBar extends StatelessWidget {
           children: [
             Align(
               child: Text(
-                'Welcome',
+                title,
                 style: context.bodyLarge?.copyWith(
                   fontFamily: Constants.fontDMSerifDisplay,
                 ),
@@ -44,7 +49,7 @@ class DTAAppBar extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: ZoomTapAnimation(
+              child: ZoomTapDetector(
                 onTap: onDrawerOpen,
                 child: Container(
                   decoration: BoxDecoration(
@@ -75,12 +80,12 @@ class DTAAppBar extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ZoomTapAnimation(
+                  ZoomTapDetector(
                     onTap: () {},
                     child: SvgPicture.asset(Assets.iconsBiBell),
                   ),
                   const SizedBox(width: 20),
-                  ZoomTapAnimation(
+                  ZoomTapDetector(
                     onTap: () {},
                     child: SvgPicture.asset(Assets.iconsOcticonPerson),
                   ),

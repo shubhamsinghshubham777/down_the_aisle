@@ -27,7 +27,7 @@ class TaskQuickDetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ZoomTapAnimation(
+    return ZoomTapDetector(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(right: 16),
@@ -46,7 +46,6 @@ class TaskQuickDetailsCard extends StatelessWidget {
                 Text(
                   title,
                   style: context.bodySmall?.copyWith(
-                    color: appColors.secondaryDark,
                     fontFamily: Constants.fontKantumruy,
                     fontWeight: FontWeight.bold,
                   ),

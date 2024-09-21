@@ -17,3 +17,11 @@ void debugLog(
 void postFrameCallback(VoidCallback callback) {
   WidgetsBinding.instance.addPostFrameCallback((_) => callback());
 }
+
+List<DateTime> get currentWeekDates {
+  final now = DateTime.now();
+  // Adjust to make Sunday 0 and Saturday 6
+  final currentWeekDay = now.weekday % 7;
+  final firstDayOfWeek = now.subtract(Duration(days: currentWeekDay));
+  return List.generate(7, (index) => firstDayOfWeek.add(Duration(days: index)));
+}

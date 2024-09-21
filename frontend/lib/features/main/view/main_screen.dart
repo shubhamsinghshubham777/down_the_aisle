@@ -59,8 +59,12 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           EasyAnimatedIndexedStack(
             index: selectedScreen.index,
             children: [
-              HomeScreen(onDrawerOpen: _scaffoldKey.currentState?.openDrawer),
-              const DashboardScreen(),
+              HomeScreen(
+                onDrawerOpen: _scaffoldKey.currentState?.openDrawer,
+              ),
+              DashboardScreen(
+                onDrawerOpen: _scaffoldKey.currentState?.openDrawer,
+              ),
               const InspireScreen(),
               const VendorsScreen(),
               const CollabScreen(),
@@ -163,7 +167,7 @@ class _BottomNavItem extends StatelessWidget {
           .subtract(bottomNavBarHorizontalPadding * 2)
           .divide(MainScreenType.values.length)
           .toDouble(),
-      child: ZoomTapAnimation(
+      child: ZoomTapDetector(
         behavior: HitTestBehavior.translucent,
         onTap: onTap,
         child: Padding(

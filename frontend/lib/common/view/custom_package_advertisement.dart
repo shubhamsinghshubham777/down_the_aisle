@@ -34,7 +34,6 @@ class CustomPackageAdvertisement extends StatelessWidget {
                     Text(
                       'Are you tired?',
                       style: context.titleLarge?.copyWith(
-                        color: appColors.secondaryDark,
                         fontFamily: Constants.fontDMSerifDisplay,
                       ),
                     ),
@@ -43,7 +42,6 @@ class CustomPackageAdvertisement extends StatelessWidget {
                       child: Text(
                         'Tired of looking through every single vendor of each service type? We will select a tailored package that best fits your interests.',
                         style: context.labelSmall?.copyWith(
-                          color: appColors.secondaryDark.withOpacity(0.8),
                           fontFamily: Constants.fontKantumruy,
                           height: 1.5,
                         ),

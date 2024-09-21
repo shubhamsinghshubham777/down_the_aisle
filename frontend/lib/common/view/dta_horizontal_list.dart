@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_icon.dart';
+import 'package:frontend/common/view/section_header.dart';
+import 'package:frontend/common/view/underlined_text.dart';
 import 'package:frontend/common/view/zoom_tap_animation.dart';
 import 'package:frontend/constants/assets.dart';
 import 'package:frontend/features/home/model/dta_horizontal_list_data.dart';
@@ -31,13 +33,7 @@ class DTAHorizontalList extends StatelessWidget {
         if (title != null)
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 24),
-            child: Text(
-              title!,
-              style: context.titleLarge?.copyWith(
-                color: appColors.secondaryDark,
-                fontFamily: Constants.fontDMSerifDisplay,
-              ),
-            ),
+            child: SectionHeader(title: title!),
           ),
         if (tags.isNotEmpty)
           Padding(
@@ -51,17 +47,9 @@ class DTAHorizontalList extends StatelessWidget {
                 itemBuilder: (listContext, index) {
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: ZoomTapAnimation(
+                    child: ZoomTapDetector(
                       onTap: () {},
-                      child: Text(
-                        tags[index],
-                        style: context.bodySmall?.copyWith(
-                          color: appColors.accent,
-                          fontFamily: Constants.fontKantumruy,
-                          decoration: TextDecoration.underline,
-                          decorationColor: appColors.accent,
-                        ),
-                      ),
+                      child: UnderlinedText(tags[index]),
                     ),
                   );
                 },
@@ -81,7 +69,7 @@ class DTAHorizontalList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (listContext, index) {
               final itemData = items[index];
-              return ZoomTapAnimation(
+              return ZoomTapDetector(
                 onTap: itemData.onTap,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 16),
@@ -123,7 +111,6 @@ class DTAHorizontalList extends StatelessWidget {
                           child: Text(
                             itemData.itemTitle!,
                             style: listContext.titleSmall?.copyWith(
-                              color: appColors.secondaryDark,
                               fontFamily: Constants.fontKantumruy,
                               fontWeight:
                                   itemSize == DTAHorizontalListItemSize.medium

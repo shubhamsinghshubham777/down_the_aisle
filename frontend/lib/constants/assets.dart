@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
   
+  static const String iconsArrowForward = "assets/icons/arrow_forward.svg";
+
   static const String iconsBiBell = "assets/icons/bi_bell.svg";
 
   static const String iconsBottomNavCollab = "assets/icons/bottom_nav_collab.svg";

@@ -2,6 +2,7 @@ import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_icon.dart';
+import 'package:frontend/common/view/underlined_text.dart';
 import 'package:frontend/common/view/zoom_tap_animation.dart';
 import 'package:frontend/constants/assets.dart';
 import 'package:frontend/utils/constants.dart';
@@ -23,29 +24,21 @@ class UpcomingTaskCard extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Text(
                     'Upcoming',
-                    style: context.bodySmall?.copyWith(
-                      color: appColors.secondaryDark,
+                    style: TextStyle(
                       fontFamily: Constants.fontKantumruy,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                ZoomTapAnimation(
+                ZoomTapDetector(
                   onTap: () {},
-                  child: Text(
-                    'View All Tasks',
-                    style: context.bodySmall?.copyWith(
-                      color: appColors.accent,
-                      fontFamily: Constants.fontKantumruy,
-                      decoration: TextDecoration.underline,
-                      decorationColor: appColors.accent,
-                    ),
-                  ),
+                  child: const UnderlinedText('View All Tasks'),
                 ),
               ],
             ),
@@ -55,7 +48,6 @@ class UpcomingTaskCard extends StatelessWidget {
             child: Text(
               'Food Tasting',
               style: context.titleLarge?.copyWith(
-                color: appColors.secondaryDark,
                 fontSize: 20,
                 fontFamily: Constants.fontDMSerifDisplay,
               ),
@@ -67,7 +59,6 @@ class UpcomingTaskCard extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16),
             child: DefaultTextStyle(
               style: context.bodySmall!.copyWith(
-                color: appColors.secondaryDark,
                 fontFamily: Constants.fontKantumruy,
               ),
               child: Row(
@@ -133,6 +124,7 @@ class UpcomingTaskCard extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            const SizedBox(width: 4),
                             const DtaIcon(Assets.iconsBiBell),
                           ],
                         ),

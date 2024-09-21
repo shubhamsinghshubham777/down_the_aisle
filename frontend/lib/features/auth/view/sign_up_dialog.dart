@@ -63,7 +63,7 @@ class _SignUpDialogState extends ConsumerState<SignUpDialog> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: Gender.values.map((g) {
-                    return ZoomTapAnimation(
+                    return ZoomTapDetector(
                       onTap: () => setState(() => gender = g),
                       child: AnimatedContainer(
                         duration: Durations.short4,

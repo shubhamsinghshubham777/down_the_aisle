@@ -5,6 +5,33 @@ import 'package:frontend/common/view/app_colors.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+extension DateTimeX on DateTime {
+  String get monthName => switch (month) {
+        DateTime.january => 'Jan',
+        DateTime.february => 'Feb',
+        DateTime.march => 'Mar',
+        DateTime.april => 'Apr',
+        DateTime.may => 'May',
+        DateTime.june => 'Jun',
+        DateTime.july => 'Jul',
+        DateTime.august => 'Aug',
+        DateTime.september => 'Sep',
+        DateTime.october => 'Oct',
+        DateTime.november => 'Nov',
+        _ => 'Dec',
+      };
+
+  String get dayName => switch (weekday) {
+        DateTime.sunday => 'Sunday',
+        DateTime.monday => 'Monday',
+        DateTime.tuesday => 'Tuesday',
+        DateTime.wednesday => 'Wednesday',
+        DateTime.thursday => 'Thursday',
+        DateTime.friday => 'Friday',
+        _ => 'Saturday',
+      };
+}
+
 extension ObjectX on Object {
   Object get dioHandledError => this is DioException
       ? (this as DioException).response?.errorMessage ?? 'Unexpected error!'

@@ -10,10 +10,12 @@ dependencies:
   animations: ^2.0.11
   awesome_extensions: ^2.0.17
   cached_network_image: ^3.4.1
+  collection: ^1.18.0
   core:
     path: ../core
   dio: ^5.7.0
   easy_animated_indexed_stack: ^0.0.2
+  fl_chart: ^0.69.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.1.0
@@ -65,6 +67,15 @@ flutter:
     - family: Calibri
       fonts:
         - asset: assets/fonts/calibri_regular.ttf
+    - family: ElMessiri
+      fonts:
+        - asset: assets/fonts/ElMessiri-Regular.ttf
+        - asset: assets/fonts/ElMessiri-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ElMessiri-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/ElMessiri-Bold.ttf
+          weight: 700
 
 flutter_assets:
   assets_path:
