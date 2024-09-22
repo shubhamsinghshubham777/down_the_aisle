@@ -12,6 +12,7 @@ class CustomPackageAdvertisement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(maxWidth: 500),
       width: double.infinity,
       height: 280,
       margin: const EdgeInsets.only(left: 20, top: 40, right: 20),
@@ -35,6 +36,7 @@ class CustomPackageAdvertisement extends StatelessWidget {
                       'Are you tired?',
                       style: context.titleLarge?.copyWith(
                         fontFamily: Constants.fontDMSerifDisplay,
+                        fontSize: 24,
                       ),
                     ),
                     Padding(
@@ -43,6 +45,7 @@ class CustomPackageAdvertisement extends StatelessWidget {
                         'Tired of looking through every single vendor of each service type? We will select a tailored package that best fits your interests.',
                         style: context.labelSmall?.copyWith(
                           fontFamily: Constants.fontKantumruy,
+                          fontSize: 12,
                           height: 1.5,
                         ),
                       ),
@@ -50,9 +53,9 @@ class CustomPackageAdvertisement extends StatelessWidget {
                     DTAButton.filled(
                       text: 'Custom Package',
                       padding: const EdgeInsets.only(
-                        left: 23,
+                        left: 32,
                         top: 9,
-                        right: 25,
+                        right: 32,
                         bottom: 9,
                       ),
                       onTap: () {},

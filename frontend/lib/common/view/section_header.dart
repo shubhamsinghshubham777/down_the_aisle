@@ -13,12 +13,16 @@ class SectionHeader extends StatelessWidget {
     this.actionText = 'View All',
     this.onActionTap,
     this.dense = false,
+    this.actionAsset = Assets.iconsArrowForward,
+    this.titleAlternateFont = false,
   });
 
   final String title;
   final String actionText;
   final VoidCallback? onActionTap;
   final bool dense;
+  final String? actionAsset;
+  final bool titleAlternateFont;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +33,15 @@ class SectionHeader extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              fontFamily: Constants.fontDMSerifDisplay,
-              fontSize: dense ? 16 : 24,
+              fontFamily: titleAlternateFont
+                  ? Constants.fontKantumruy
+                  : Constants.fontDMSerifDisplay,
+              fontSize: dense
+                  ? titleAlternateFont
+                      ? 14
+                      : 16
+                  : 24,
+              fontWeight: titleAlternateFont ? FontWeight.bold : null,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -43,12 +54,13 @@ class SectionHeader extends StatelessWidget {
                 onTap: onActionTap,
                 child: UnderlinedText(actionText),
               ),
-              const SizedBox(width: 8),
-              DtaIcon(
-                Assets.iconsArrowForward,
-                color: appColors.accent,
-                width: 8,
-              )
+              if (actionAsset != null) const SizedBox(width: 8),
+              if (actionAsset != null)
+                DtaIcon(
+                  actionAsset!,
+                  color: appColors.accent,
+                  width: 8,
+                ),
             ],
           ),
       ],

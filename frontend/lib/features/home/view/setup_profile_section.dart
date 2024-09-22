@@ -31,7 +31,7 @@ class SetupProfileSection extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               left: 24,
-              top: DTAAppBar.appBarSize(context).height,
+              top: DTAAppBar.appBarSize(context).height + 24,
             ),
             child: FractionallySizedBox(
               widthFactor: 0.5,

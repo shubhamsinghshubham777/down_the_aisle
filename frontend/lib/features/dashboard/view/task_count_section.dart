@@ -16,6 +16,7 @@ class TaskCountSection extends StatelessWidget {
       child: Column(
         children: [
           DTAAppBar(title: 'Dashboard', onDrawerOpen: onDrawerOpen),
+          const SizedBox(height: 24),
           Text(
             '81/164',
             style: TextStyle(

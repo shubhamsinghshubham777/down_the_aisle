@@ -11,6 +11,7 @@ class AppColors {
     required this.secondaryMedium,
     required this.secondaryDark,
     required this.backgroundPink,
+    required this.yellow,
   });
 
   final Color accent;
@@ -22,6 +23,7 @@ class AppColors {
   final Color secondaryMedium;
   final Color secondaryDark;
   final Color backgroundPink;
+  final Color yellow;
 }
 
 const appColors = AppColors._(
@@ -34,4 +36,5 @@ const appColors = AppColors._(
   secondaryMedium: Color(0xFF9EA1AB),
   secondaryDark: Color(0xFF1E2742),
   backgroundPink: Color(0xFFFDAD9B),
+  yellow: Color(0xFFF9C83C),
 );

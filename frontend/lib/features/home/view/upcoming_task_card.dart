@@ -13,6 +13,7 @@ class UpcomingTaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(maxWidth: 500),
       decoration: BoxDecoration(
         color: appColors.primaryLight,
         borderRadius: BorderRadius.circular(16),

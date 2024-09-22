@@ -27,7 +27,6 @@ class DTAAppBar extends StatelessWidget {
       left: 20,
       top: 24 + context.mqViewPadding.top,
       right: 20,
-      bottom: 24,
     );
   }
 
@@ -42,8 +41,9 @@ class DTAAppBar extends StatelessWidget {
             Align(
               child: Text(
                 title,
-                style: context.bodyLarge?.copyWith(
+                style: const TextStyle(
                   fontFamily: Constants.fontDMSerifDisplay,
+                  fontSize: 18,
                 ),
               ),
             ),
@@ -82,12 +82,18 @@ class DTAAppBar extends StatelessWidget {
                 children: [
                   ZoomTapDetector(
                     onTap: () {},
-                    child: SvgPicture.asset(Assets.iconsBiBell),
+                    child: SvgPicture.asset(
+                      Assets.iconsBiBell,
+                      width: 24,
+                    ),
                   ),
                   const SizedBox(width: 20),
                   ZoomTapDetector(
                     onTap: () {},
-                    child: SvgPicture.asset(Assets.iconsOcticonPerson),
+                    child: SvgPicture.asset(
+                      Assets.iconsOcticonPerson,
+                      width: 24,
+                    ),
                   ),
                 ],
               ),

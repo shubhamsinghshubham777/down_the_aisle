@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
   
+  static const String iconsArrowDown = "assets/icons/arrow_down.svg";
+
   static const String iconsArrowForward = "assets/icons/arrow_forward.svg";
 
   static const String iconsBiBell = "assets/icons/bi_bell.svg";
@@ -30,6 +32,8 @@ class Assets {
 
   static const String iconsOcticonPerson = "assets/icons/octicon_person.svg";
 
+  static const String iconsStar = "assets/icons/star.svg";
+
   static const String iconsWarning = "assets/icons/warning.svg";
 
   static const String imagesAuthBg = "assets/images/auth_bg.webp";
@@ -41,5 +45,7 @@ class Assets {
   static const String imagesFloralBg = "assets/images/floral_bg.png";
 
   static const String imagesFlowers = "assets/images/flowers.webp";
+
+  static const String imagesLocationAgra = "assets/images/location_agra.svg";
 }
 

@@ -14,7 +14,7 @@ class UnderlinedText extends StatelessWidget {
       style: TextStyle(
         color: appColors.accent,
         fontFamily: Constants.fontKantumruy,
-        fontSize: 12,
+        fontSize: 13,
         decoration: TextDecoration.underline,
         decorationColor: appColors.accent,
       ),

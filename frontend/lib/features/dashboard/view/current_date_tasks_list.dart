@@ -93,14 +93,12 @@ class _TaskBriefText extends StatelessWidget {
             ),
           ),
           Flexible(
-            child: Flexible(
-              child: Text(
-                text,
-                style: const TextStyle(fontWeight: FontWeight.normal),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.start,
-              ),
+            child: Text(
+              text,
+              style: const TextStyle(fontWeight: FontWeight.normal),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.start,
             ),
           ),
         ],
