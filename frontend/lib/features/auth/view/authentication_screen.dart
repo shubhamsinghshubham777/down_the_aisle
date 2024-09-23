@@ -25,7 +25,7 @@ class AuthenticationScreen extends StatelessWidget {
 
           // Pink background image
           SizedBox.expand(
-            child: Image.asset(Assets.imagesAuthBg, fit: BoxFit.fitHeight),
+            child: Image.asset(Assets.imageAuthBg, fit: BoxFit.fitHeight),
           ),
 
           // Golden border
@@ -34,7 +34,7 @@ class AuthenticationScreen extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(Assets.imagesAuthBgBorder),
+                  image: AssetImage(Assets.imageAuthBgBorder),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -122,7 +122,7 @@ class AuthenticationScreen extends StatelessWidget {
               width: 600,
               height: 310,
               child: Image.asset(
-                Assets.imagesFlowers,
+                Assets.imageFlowers,
                 fit: BoxFit.cover,
               ),
             ),

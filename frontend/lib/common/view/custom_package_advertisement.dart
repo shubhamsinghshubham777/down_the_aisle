@@ -69,7 +69,7 @@ class CustomPackageAdvertisement extends StatelessWidget {
             alignment: Alignment.topRight,
             child: Transform.translate(
               offset: const Offset(0, -16),
-              child: SvgPicture.asset(Assets.iconsDecoration),
+              child: SvgPicture.asset(Assets.iconDecoration),
             ),
           ),
         ],

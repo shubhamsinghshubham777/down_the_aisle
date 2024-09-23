@@ -112,7 +112,7 @@ class UpcomingTaskCard extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const DtaIcon(Assets.iconsChatBubble),
+                            const DtaIcon(Assets.iconChatBubble),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,
@@ -126,7 +126,7 @@ class UpcomingTaskCard extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 4),
-                            const DtaIcon(Assets.iconsBiBell),
+                            const DtaIcon(Assets.iconBiBell),
                           ],
                         ),
                       ),

@@ -112,7 +112,7 @@ class _VenueItem extends StatelessWidget {
                     Row(
                       children: [
                         DtaIcon(
-                          Assets.iconsStar,
+                          Assets.iconStar,
                           color: appColors.yellow,
                         ),
                         const SizedBox(width: 6),

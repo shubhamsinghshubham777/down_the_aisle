@@ -90,7 +90,7 @@ class TaskQuickDetailsCard extends StatelessWidget {
                   ),
                 ),
                 DtaIcon(
-                  Assets.iconsCalendar,
+                  Assets.iconCalendar,
                   color: appColors.secondaryDark,
                 ),
               ],

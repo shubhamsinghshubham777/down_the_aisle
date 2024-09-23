@@ -96,7 +96,7 @@ class DTAHorizontalList extends StatelessWidget {
                               color: appColors.primaryLight,
                               child: Center(
                                 child: DtaIcon(
-                                  Assets.iconsWarning,
+                                  Assets.iconWarning,
                                   color: appColors.accent.withOpacity(0.8),
                                   width: 32,
                                 ),

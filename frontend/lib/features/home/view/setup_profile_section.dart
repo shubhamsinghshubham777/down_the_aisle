@@ -1,24 +1,28 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_app_bar.dart';
 import 'package:frontend/common/view/dta_button.dart';
 import 'package:frontend/common/view/half_onion_dome_container.dart';
 import 'package:frontend/constants/assets.dart';
+import 'package:frontend/features/home/provider/home_screen_provider.dart';
 import 'package:frontend/utils/constants.dart';
 
-class SetupProfileSection extends StatelessWidget {
+class SetupProfileSection extends ConsumerWidget {
   const SetupProfileSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userProfileState = ref.watch(userProfileProvider);
+
     return HalfOnionDomeContainer(
       width: context.width,
       height: 350,
       child: Stack(
         children: [
           Image.asset(
-            Assets.imagesFloralBg,
+            Assets.imageFloralBg,
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
@@ -40,7 +44,11 @@ class SetupProfileSection extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Hello, Divya!',
+                    userProfileState.maybeWhen(
+                      data: (user) => 'Hello, ${user.firstName}!',
+                      loading: () => 'Loading...',
+                      orElse: () => '',
+                    ),
                     style: context.displaySmall?.copyWith(
                       fontFamily: Constants.fontComforter,
                     ),
@@ -75,7 +83,7 @@ class SetupProfileSection extends StatelessWidget {
             bottom: 20,
             right: -4,
             height: 233,
-            child: Image.asset(Assets.imagesAvatarWoman),
+            child: Image.asset(Assets.imageAvatarWoman),
           ),
         ],
       ),

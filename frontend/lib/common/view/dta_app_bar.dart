@@ -70,7 +70,7 @@ class DTAAppBar extends StatelessWidget {
                       right: 4,
                       bottom: 3,
                     ),
-                    child: SvgPicture.asset(Assets.iconsBxMenu),
+                    child: SvgPicture.asset(Assets.iconBxMenu),
                   ),
                 ),
               ),
@@ -83,7 +83,7 @@ class DTAAppBar extends StatelessWidget {
                   ZoomTapDetector(
                     onTap: () {},
                     child: SvgPicture.asset(
-                      Assets.iconsBiBell,
+                      Assets.iconBiBell,
                       width: 24,
                     ),
                   ),
@@ -91,7 +91,7 @@ class DTAAppBar extends StatelessWidget {
                   ZoomTapDetector(
                     onTap: () {},
                     child: SvgPicture.asset(
-                      Assets.iconsOcticonPerson,
+                      Assets.iconOcticonPerson,
                       width: 24,
                     ),
                   ),

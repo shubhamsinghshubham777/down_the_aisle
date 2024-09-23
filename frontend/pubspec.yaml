@@ -45,42 +45,42 @@ flutter:
   assets:
     - .env.dev
     - .env.prod
-    - assets/images/
-    - assets/icons/
+    - assets/image/
+    - assets/icon/
   fonts:
     - family: DMSerifDisplay
       fonts:
-        - asset: assets/fonts/DMSerifDisplay-Regular.ttf
+        - asset: assets/font/DMSerifDisplay-Regular.ttf
     - family: Kantumruy
       fonts:
-        - asset: assets/fonts/Kantumruy-Regular.ttf
-        - asset: assets/fonts/Kantumruy-Bold.ttf
+        - asset: assets/font/Kantumruy-Regular.ttf
+        - asset: assets/font/Kantumruy-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Kantumruy-Light.ttf
+        - asset: assets/font/Kantumruy-Light.ttf
           weight: 300
     - family: Krylon
       fonts:
-        - asset: assets/fonts/Krylon-Regular.otf
+        - asset: assets/font/Krylon-Regular.otf
     - family: Comforter
       fonts:
-        - asset: assets/fonts/Comforter-Regular.ttf
+        - asset: assets/font/Comforter-Regular.ttf
     - family: Calibri
       fonts:
-        - asset: assets/fonts/calibri_regular.ttf
+        - asset: assets/font/calibri_regular.ttf
     - family: ElMessiri
       fonts:
-        - asset: assets/fonts/ElMessiri-Regular.ttf
-        - asset: assets/fonts/ElMessiri-Medium.ttf
+        - asset: assets/font/ElMessiri-Regular.ttf
+        - asset: assets/font/ElMessiri-Medium.ttf
           weight: 500
-        - asset: assets/fonts/ElMessiri-SemiBold.ttf
+        - asset: assets/font/ElMessiri-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/ElMessiri-Bold.ttf
+        - asset: assets/font/ElMessiri-Bold.ttf
           weight: 700
 
 flutter_assets:
   assets_path:
-    - assets/images/
-    - assets/icons/
+    - assets/image/
+    - assets/icon/
   output_path: lib/constants/
   filename: assets.dart
   field_prefix:

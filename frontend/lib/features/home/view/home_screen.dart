@@ -50,9 +50,9 @@ class HomeScreen extends ConsumerWidget {
                     key: Key(index.toString()),
                     dateTime: DateTime.now(),
                     iconAsset: switch (index) {
-                      0 => Assets.iconsCalendar,
-                      1 => Assets.iconsMoney,
-                      _ => Assets.iconsBiBell,
+                      0 => Assets.iconCalendar,
+                      1 => Assets.iconMoney,
+                      _ => Assets.iconBiBell,
                     },
                     title: switch (index) {
                       0 => 'Wedding',

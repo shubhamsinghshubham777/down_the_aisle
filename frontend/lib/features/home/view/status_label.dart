@@ -22,7 +22,7 @@ class StatusLabel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         DtaIcon(
-          isCompleted ? Assets.iconsCheck : Assets.iconsWarning,
+          isCompleted ? Assets.iconCheck : Assets.iconWarning,
           color: contentColor,
         ),
         const SizedBox(width: 4),

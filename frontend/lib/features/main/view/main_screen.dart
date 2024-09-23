@@ -93,7 +93,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _BottomNavItem(
-                      asset: Assets.iconsBottomNavHome,
+                      asset: Assets.iconBottomNavHome,
                       label: 'Home',
                       selected: selectedScreen == MainScreenType.home,
                       onTap: () => screenChanger.changeScreen(
@@ -101,7 +101,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       ),
                     ),
                     _BottomNavItem(
-                      asset: Assets.iconsBottomNavDash,
+                      asset: Assets.iconBottomNavDash,
                       label: 'Dashboard',
                       selected: selectedScreen == MainScreenType.dashboard,
                       onTap: () => screenChanger.changeScreen(
@@ -109,7 +109,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       ),
                     ),
                     _BottomNavItem(
-                      asset: Assets.iconsBottomNavInspire,
+                      asset: Assets.iconBottomNavInspire,
                       label: 'Inspire',
                       selected: selectedScreen == MainScreenType.inspire,
                       onTap: () => screenChanger.changeScreen(
@@ -117,7 +117,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       ),
                     ),
                     _BottomNavItem(
-                      asset: Assets.iconsBottomNavVendors,
+                      asset: Assets.iconBottomNavVendors,
                       label: 'Vendors',
                       selected: selectedScreen == MainScreenType.vendors,
                       onTap: () => screenChanger.changeScreen(
@@ -125,7 +125,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                       ),
                     ),
                     _BottomNavItem(
-                      asset: Assets.iconsBottomNavCollab,
+                      asset: Assets.iconBottomNavCollab,
                       label: 'Collab',
                       selected: selectedScreen == MainScreenType.collab,
                       onTap: () => screenChanger.changeScreen(

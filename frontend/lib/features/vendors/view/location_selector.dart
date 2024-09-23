@@ -44,7 +44,7 @@ class _LocationSelectorState extends State<LocationSelector> {
             icon: Padding(
               padding: const EdgeInsets.only(left: 5, top: 5),
               child: DtaIcon(
-                Assets.iconsArrowDown,
+                Assets.iconArrowDown,
                 color: appColors.accent,
                 width: 7,
                 height: 7,
@@ -56,7 +56,7 @@ class _LocationSelectorState extends State<LocationSelector> {
             borderRadius: BorderRadius.circular(12),
           ),
           SvgPicture.asset(
-            Assets.imagesLocationAgra,
+            Assets.imageLocationAgra,
             height: 104,
           ),
           const SizedBox(height: 80),

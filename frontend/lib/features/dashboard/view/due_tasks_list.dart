@@ -129,8 +129,8 @@ class _DueTaskListItem extends StatelessWidget {
                       2,
                       (index) => DtaIcon(
                         switch (index) {
-                          0 => Assets.iconsChatBubble,
-                          _ => Assets.iconsBiBell,
+                          0 => Assets.iconChatBubble,
+                          _ => Assets.iconBiBell,
                         },
                         color: appColors.secondaryDark.withOpacity(0.6),
                         width: 16,

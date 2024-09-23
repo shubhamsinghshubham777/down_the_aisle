@@ -2,50 +2,52 @@
 class Assets {
   Assets._();
   
-  static const String iconsArrowDown = "assets/icons/arrow_down.svg";
+  static const String iconArrowDown = "assets/icon/arrow_down.svg";
 
-  static const String iconsArrowForward = "assets/icons/arrow_forward.svg";
+  static const String iconArrowForward = "assets/icon/arrow_forward.svg";
 
-  static const String iconsBiBell = "assets/icons/bi_bell.svg";
+  static const String iconBiBell = "assets/icon/bi_bell.svg";
 
-  static const String iconsBottomNavCollab = "assets/icons/bottom_nav_collab.svg";
+  static const String iconBottomNavCollab = "assets/icon/bottom_nav_collab.svg";
 
-  static const String iconsBottomNavDash = "assets/icons/bottom_nav_dash.svg";
+  static const String iconBottomNavDash = "assets/icon/bottom_nav_dash.svg";
 
-  static const String iconsBottomNavHome = "assets/icons/bottom_nav_home.svg";
+  static const String iconBottomNavHome = "assets/icon/bottom_nav_home.svg";
 
-  static const String iconsBottomNavInspire = "assets/icons/bottom_nav_inspire.svg";
+  static const String iconBottomNavInspire = "assets/icon/bottom_nav_inspire.svg";
 
-  static const String iconsBottomNavVendors = "assets/icons/bottom_nav_vendors.svg";
+  static const String iconBottomNavVendors = "assets/icon/bottom_nav_vendors.svg";
 
-  static const String iconsBxMenu = "assets/icons/bx_menu.svg";
+  static const String iconBxMenu = "assets/icon/bx_menu.svg";
 
-  static const String iconsCalendar = "assets/icons/calendar.svg";
+  static const String iconCalendar = "assets/icon/calendar.svg";
 
-  static const String iconsChatBubble = "assets/icons/chat_bubble.svg";
+  static const String iconChatBubble = "assets/icon/chat_bubble.svg";
 
-  static const String iconsCheck = "assets/icons/check.svg";
+  static const String iconCheck = "assets/icon/check.svg";
 
-  static const String iconsDecoration = "assets/icons/decoration.svg";
+  static const String iconDecoration = "assets/icon/decoration.svg";
 
-  static const String iconsMoney = "assets/icons/money.svg";
+  static const String iconMoney = "assets/icon/money.svg";
 
-  static const String iconsOcticonPerson = "assets/icons/octicon_person.svg";
+  static const String iconOcticonPerson = "assets/icon/octicon_person.svg";
 
-  static const String iconsStar = "assets/icons/star.svg";
+  static const String iconStar = "assets/icon/star.svg";
 
-  static const String iconsWarning = "assets/icons/warning.svg";
+  static const String iconWarning = "assets/icon/warning.svg";
 
-  static const String imagesAuthBg = "assets/images/auth_bg.webp";
+  static const String imageAuthBg = "assets/image/auth_bg.webp";
 
-  static const String imagesAuthBgBorder = "assets/images/auth_bg_border.webp";
+  static const String imageAuthBgBorder = "assets/image/auth_bg_border.webp";
 
-  static const String imagesAvatarWoman = "assets/images/avatar_woman.webp";
+  static const String imageAvatarWoman = "assets/image/avatar_woman.webp";
 
-  static const String imagesFloralBg = "assets/images/floral_bg.png";
+  static const String imageFloralBg = "assets/image/floral_bg.png";
 
-  static const String imagesFlowers = "assets/images/flowers.webp";
+  static const String imageFlowers = "assets/image/flowers.webp";
 
-  static const String imagesLocationAgra = "assets/images/location_agra.svg";
+  static const String imageInProgress = "assets/image/in_progress.webp";
+
+  static const String imageLocationAgra = "assets/image/location_agra.svg";
 }
 

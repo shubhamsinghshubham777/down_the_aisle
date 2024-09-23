@@ -44,7 +44,7 @@ class _WeekCalendarRowState extends State<WeekCalendarRow> {
               ),
               const SizedBox(width: 8),
               DtaIcon(
-                Assets.iconsArrowForward,
+                Assets.iconArrowForward,
                 color: appColors.accent,
                 width: 8,
               ),

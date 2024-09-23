@@ -13,7 +13,7 @@ class SectionHeader extends StatelessWidget {
     this.actionText = 'View All',
     this.onActionTap,
     this.dense = false,
-    this.actionAsset = Assets.iconsArrowForward,
+    this.actionAsset = Assets.iconArrowForward,
     this.titleAlternateFont = false,
   });
 
