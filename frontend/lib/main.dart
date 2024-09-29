@@ -12,8 +12,11 @@ import 'package:frontend/features/auth/view/authentication_screen.dart';
 import 'package:frontend/features/main/view/main_screen.dart';
 import 'package:frontend/utils/extensions.dart';
 import 'package:frontend/utils/utils.dart';
+import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  _setupDesktopWindow();
   final appEnv = AppEnvironment.values.firstWhere(
     (e) => e.name == const String.fromEnvironment('APP_ENV'),
     orElse: () => AppEnvironment.prod,
@@ -33,6 +36,17 @@ Future<void> main() async {
     ),
   );
   runApp(const ProviderScope(child: App()));
+}
+
+void _setupDesktopWindow() {
+  windowManager
+    ..ensureInitialized()
+    ..waitUntilReadyToShow(
+      const WindowOptions(minimumSize: Size(450, 450)),
+      () => windowManager
+        ..show()
+        ..focus(),
+    );
 }
 
 class App extends ConsumerStatefulWidget {

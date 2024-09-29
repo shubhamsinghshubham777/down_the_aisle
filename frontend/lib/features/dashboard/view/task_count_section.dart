@@ -5,9 +5,7 @@ import 'package:frontend/common/view/half_onion_dome_container.dart';
 import 'package:frontend/utils/constants.dart';
 
 class TaskCountSection extends StatelessWidget {
-  const TaskCountSection({required this.onDrawerOpen, super.key});
-
-  final VoidCallback? onDrawerOpen;
+  const TaskCountSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,7 @@ class TaskCountSection extends StatelessWidget {
       height: 276,
       child: Column(
         children: [
-          DTAAppBar(title: 'Dashboard', onDrawerOpen: onDrawerOpen),
+          const DTAAppBar(title: 'Dashboard'),
           const SizedBox(height: 24),
           Text(
             '81/164',

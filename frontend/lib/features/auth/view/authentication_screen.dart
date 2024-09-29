@@ -30,7 +30,7 @@ class AuthenticationScreen extends StatelessWidget {
 
           // Golden border
           ClipPath(
-            clipper: OnionDomeClipper(),
+            clipper: const OnionDomeClipper(),
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -48,7 +48,7 @@ class AuthenticationScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 // White container
                 child: ClipPath(
-                  clipper: OnionDomeClipper(),
+                  clipper: const OnionDomeClipper(),
                   child: Container(
                     alignment: Alignment.center,
                     width: double.infinity,

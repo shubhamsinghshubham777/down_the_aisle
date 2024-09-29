@@ -1,28 +1,40 @@
+class MessageException implements Exception {
+  const MessageException(this.message);
+  final String message;
+}
+
 class JWTException implements Exception {
-  JWTException(this.cause);
-  String cause;
+  const JWTException({this.cause});
+  final String? cause;
 }
 
 class JWTFormatException implements JWTException {
-  JWTFormatException(this.cause);
+  const JWTFormatException({this.cause});
   @override
-  String cause;
+  final String? cause;
 }
 
 class JWTExpiredException implements JWTException {
-  JWTExpiredException(this.cause);
+  const JWTExpiredException({this.cause});
   @override
-  String cause;
+  final String? cause;
 }
 
 class JWTInvalidSignatureException implements JWTException {
-  JWTInvalidSignatureException(this.cause);
+  const JWTInvalidSignatureException({this.cause});
   @override
-  String cause;
+  final String? cause;
 }
 
 class JWTInvalidClaimException implements JWTException {
-  JWTInvalidClaimException(this.cause);
+  const JWTInvalidClaimException({this.cause});
   @override
-  String cause;
+  final String? cause;
+}
+
+class UserNotFoundException implements MessageException {
+  const UserNotFoundException();
+
+  @override
+  String get message => 'User with the given credentails was not found!';
 }

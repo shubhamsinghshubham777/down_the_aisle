@@ -94,7 +94,7 @@ class CredentialManagerImpl implements CredentialManager {
   JWTPayload? verifyJWT(String token) {
     final parts = token.split('.');
     if (parts.length != 3) {
-      throw JWTFormatException('Invalid token format');
+      throw const JWTFormatException(cause: 'Invalid token format');
     }
 
     try {
@@ -103,7 +103,9 @@ class CredentialManagerImpl implements CredentialManager {
 
       // Verify algorithm
       if (header['alg'] != 'HS256') {
-        throw JWTFormatException('Unsupported algorithm: ${header['alg']}');
+        throw JWTFormatException(
+          cause: 'Unsupported algorithm: ${header['alg']}',
+        );
       }
 
       // Verify signature
@@ -113,7 +115,7 @@ class CredentialManagerImpl implements CredentialManager {
       final computedSignature = _base64UrlEncode(digest.bytes);
 
       if (computedSignature != parts[2]) {
-        throw JWTInvalidSignatureException('Invalid signature');
+        throw const JWTInvalidSignatureException(cause: 'Invalid signature');
       }
 
       // Verify expiration
@@ -121,17 +123,17 @@ class CredentialManagerImpl implements CredentialManager {
         (payload['exp'] as int) * 1000,
       );
       if (DateTime.now().isAfter(expiration)) {
-        throw JWTExpiredException('Token has expired');
+        throw const JWTExpiredException(cause: 'Token has expired');
       }
 
       // Verify audience
       if (payload['aud'] != config.jwtAudience) {
-        throw JWTInvalidClaimException('Invalid audience');
+        throw const JWTInvalidClaimException(cause: 'Invalid audience');
       }
 
       // Verify issuer
       if (payload['iss'] != config.jwtIssuer) {
-        throw JWTInvalidClaimException('Invalid issuer');
+        throw const JWTInvalidClaimException(cause: 'Invalid issuer');
       }
 
       return JWTPayload(
@@ -142,7 +144,7 @@ class CredentialManagerImpl implements CredentialManager {
       );
     } catch (e) {
       if (e is JWTException) rethrow;
-      throw JWTFormatException('Failed to parse token: $e');
+      throw JWTFormatException(cause: 'Failed to parse token: $e');
     }
   }
 

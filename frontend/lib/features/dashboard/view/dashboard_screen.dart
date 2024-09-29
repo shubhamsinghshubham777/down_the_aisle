@@ -13,12 +13,7 @@ import 'package:frontend/features/home/view/home_screen.dart';
 import 'package:frontend/features/main/view/main_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
-  const DashboardScreen({
-    super.key,
-    this.onDrawerOpen,
-  });
-
-  final VoidCallback? onDrawerOpen;
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,7 +21,7 @@ class DashboardScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TaskCountSection(onDrawerOpen: onDrawerOpen),
+            const TaskCountSection(),
             const WeekCalendarRow(),
             const SizedBox(height: 16),
             const CurrentDateTasksList(),

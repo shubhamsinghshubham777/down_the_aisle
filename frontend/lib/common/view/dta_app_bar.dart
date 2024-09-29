@@ -1,20 +1,21 @@
+import 'dart:async';
+
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/zoom_tap_animation.dart';
 import 'package:frontend/constants/assets.dart';
+import 'package:frontend/features/auth/provider/auth_providers.dart';
+import 'package:frontend/features/auth/view/authentication_screen.dart';
+import 'package:frontend/features/main/provider/main_screen_state.dart';
 import 'package:frontend/utils/constants.dart';
 
-class DTAAppBar extends StatelessWidget {
-  const DTAAppBar({
-    required this.title,
-    super.key,
-    this.onDrawerOpen,
-  });
+class DTAAppBar extends ConsumerWidget {
+  const DTAAppBar({required this.title, super.key});
 
   final String title;
-  final VoidCallback? onDrawerOpen;
 
   static Size appBarSize(BuildContext context) => Size(
         context.width,
@@ -31,7 +32,10 @@ class DTAAppBar extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sheetController = ref.watch(isDrawerOpenProvider.notifier);
+    final authenticator = ref.watch(authenticationProvider.notifier);
+
     return SizedBox.fromSize(
       size: DTAAppBar.appBarSize(context),
       child: Padding(
@@ -50,7 +54,7 @@ class DTAAppBar extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: ZoomTapDetector(
-                onTap: onDrawerOpen,
+                onTap: sheetController.openDrawer,
                 child: Container(
                   decoration: BoxDecoration(
                     color: appColors.surface,
@@ -88,8 +92,22 @@ class DTAAppBar extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 20),
-                  ZoomTapDetector(
-                    onTap: () {},
+                  PopupMenuButton<dynamic>(
+                    itemBuilder: (_) => [
+                      PopupMenuItem(
+                        child: const Text('Logout'),
+                        onTap: () async {
+                          await authenticator.logout();
+                          if (context.mounted) {
+                            unawaited(
+                              context.pushAndRemoveUntil(
+                                const AuthenticationScreen(),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ],
                     child: SvgPicture.asset(
                       Assets.iconOcticonPerson,
                       width: 24,

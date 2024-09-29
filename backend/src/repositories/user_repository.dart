@@ -5,7 +5,7 @@ import '../utils/extensions.dart';
 
 abstract class UserRepository {
   Future<DTAUser?> findUser(String email);
-  Future<bool> insertUser(DTAUser user);
+  Future<bool> upsertUser(DTAUser? user);
 }
 
 class MongoUserRepository implements UserRepository {
@@ -26,8 +26,44 @@ class MongoUserRepository implements UserRepository {
   }
 
   @override
-  Future<bool> insertUser(DTAUser user) async {
-    final result = await mongoDb.usersCollection.insertOne(user.toJson());
+  Future<bool> upsertUser(DTAUser? user) async {
+    if (user == null) return false;
+    final dbUser = await findUser(user.email);
+    final modifier = modify;
+
+    if (user.firstName != dbUser?.firstName) {
+      modifier.set('firstName', user.firstName);
+    }
+
+    if (user.email != dbUser?.email) {
+      modifier.set('email', user.email);
+    }
+
+    if (user.gender != dbUser?.gender) {
+      modifier.set('gender', user.gender.name);
+    }
+
+    if (user.hashedPassword != dbUser?.hashedPassword) {
+      modifier.set('hashedPassword', user.hashedPassword);
+    }
+
+    if (user.passwordSalt != dbUser?.passwordSalt) {
+      modifier.set('passwordSalt', user.passwordSalt);
+    }
+
+    if (user.weddingBudget != dbUser?.weddingBudget) {
+      modifier.set('weddingBudget', user.weddingBudget);
+    }
+
+    if (user.weddingDate != dbUser?.weddingDate) {
+      modifier.set('weddingDate', user.weddingDate);
+    }
+
+    final result = await mongoDb.usersCollection.updateOne(
+      where.eq('email', user.email),
+      modifier,
+      upsert: true,
+    );
     return result.isSuccess;
   }
 }

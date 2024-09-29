@@ -61,7 +61,6 @@ class CompleteVendorTeamSection extends StatelessWidget {
 
 class _VendorTeamListItem extends StatelessWidget {
   const _VendorTeamListItem({
-    super.key,
     required this.categoryName,
     required this.shortlistedCount,
     required this.bookedCount,

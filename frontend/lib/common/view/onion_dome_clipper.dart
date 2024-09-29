@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OnionDomeClipper extends CustomClipper<Path> {
+  const OnionDomeClipper();
+
   @override
   Path getClip(Size size) {
     return Path()

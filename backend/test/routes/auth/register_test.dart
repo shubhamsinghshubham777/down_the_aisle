@@ -87,7 +87,7 @@ void main() {
           (_) async => null,
         );
 
-        when(() => userRepository.insertUser(_fakeUser)).thenAnswer(
+        when(() => userRepository.upsertUser(_fakeUser)).thenAnswer(
           (_) async => false,
         );
 
@@ -101,7 +101,7 @@ void main() {
         (_) async => null,
       );
 
-      when(() => userRepository.insertUser(_fakeUser)).thenAnswer(
+      when(() => userRepository.upsertUser(_fakeUser)).thenAnswer(
         (_) async => true,
       );
 

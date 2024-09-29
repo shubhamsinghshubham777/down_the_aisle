@@ -6,11 +6,11 @@ import 'package:mongo_dart/mongo_dart.dart';
 import '../src/models/token_config.dart';
 import '../src/repositories/credential_manager.dart';
 import '../src/repositories/user_repository.dart';
+import '../src/utils/extensions.dart';
 
 Handler middleware(Handler handler) {
   return handler
       .use(requestLogger())
-      // Uses => `db`, Provides => `Future<UserRepository>`
       .use(Middlewares.userRepository)
       .use(Middlewares.db)
       .use(Middlewares.credentialManager);
@@ -21,7 +21,7 @@ class Middlewares {
 
   static final userRepository = provider<Future<UserRepository>>(
     (context) async => MongoUserRepository(
-      mongoDb: await context.read<Future<Db>>(),
+      mongoDb: await context.injectMongoDB(),
     ),
   );
 

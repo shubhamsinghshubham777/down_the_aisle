@@ -3,6 +3,8 @@ import 'package:core/models/auth/login_request.dart';
 import 'package:core/models/auth/register_request.dart';
 import 'package:frontend/common/providers.dart';
 import 'package:frontend/features/auth/data/auth_service.dart';
+import 'package:frontend/features/home/data/user_service.dart';
+import 'package:frontend/features/home/provider/setup_profile_dialog_providers.dart';
 import 'package:frontend/utils/extensions.dart';
 import 'package:frontend/utils/utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,13 +20,14 @@ AuthService authService(AuthServiceRef ref) {
 @riverpod
 class Authentication extends _$Authentication {
   AuthService get _authService => ref.read(authServiceProvider);
+  UserService get _userService => ref.read(userServiceProvider);
   Future<SharedPreferences> get _sharedPrefs =>
       ref.read(sharedPreferencesProvider.future);
 
   @override
   FutureOr<DTAUser?> build() async {
     try {
-      final response = await _authService.getUserProfile();
+      final response = await _userService.getUserProfile();
       if (response.hasError) throw Exception(response.errorMessage);
       return response.data;
     } catch (e, st) {
@@ -44,7 +47,7 @@ class Authentication extends _$Authentication {
         prefs.setAccessToken(tokens.accessToken),
         prefs.setRefreshToken(tokens.refreshToken),
       ]);
-      final profileResponse = await _authService.getUserProfile();
+      final profileResponse = await _userService.getUserProfile();
       if (profileResponse.hasError) {
         throw Exception(profileResponse.errorMessage);
       }
@@ -69,6 +72,12 @@ class Authentication extends _$Authentication {
         StackTrace.current,
       );
     }
+  }
+
+  Future<void> logout() async {
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    await prefs.deleteAccessToken();
+    ref.invalidateSelf();
   }
 }
 

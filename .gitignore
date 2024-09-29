@@ -12,3 +12,5 @@
 *.g.*
 *.freezed.*
 *.mocks.*
+
+.idea

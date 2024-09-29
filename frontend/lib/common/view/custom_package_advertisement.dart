@@ -42,7 +42,9 @@ class CustomPackageAdvertisement extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Text(
-                        'Tired of looking through every single vendor of each service type? We will select a tailored package that best fits your interests.',
+                        'Tired of looking through every single vendor of '
+                        'each service type? We will select a tailored package '
+                        'that best fits your interests.',
                         style: context.labelSmall?.copyWith(
                           fontFamily: Constants.fontKantumruy,
                           fontSize: 12,

@@ -7,23 +7,29 @@ class DTATextField extends StatefulWidget {
   const DTATextField({
     required this.labelText,
     required this.controller,
-    required this.validator,
     required this.keyboardType,
     super.key,
+    this.validator,
     this.isSecure = false,
     this.maxLength,
     this.isLastField = false,
     this.useLightTheme = false,
+    this.prefixIcon,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String labelText;
   final TextEditingController controller;
-  final FormFieldValidator<String> validator;
+  final FormFieldValidator<String>? validator;
   final bool isSecure;
   final int? maxLength;
   final bool isLastField;
   final TextInputType keyboardType;
   final bool useLightTheme;
+  final Widget? prefixIcon;
+  final bool readOnly;
+  final VoidCallback? onTap;
 
   @override
   State<DTATextField> createState() => _DTATextFieldState();
@@ -71,6 +77,7 @@ class _DTATextFieldState extends State<DTATextField> {
           labelStyle: secondaryTextStyle,
           helperStyle: secondaryTextStyle,
           errorStyle: TextStyle(color: appColors.primaryMedium),
+          prefixIcon: widget.prefixIcon,
           suffixIcon: !widget.isSecure
               ? null
               : Padding(
@@ -93,6 +100,8 @@ class _DTATextFieldState extends State<DTATextField> {
         maxLength: widget.maxLength,
         maxLengthEnforcement: MaxLengthEnforcement.enforced,
         obscureText: localIsSecure,
+        readOnly: widget.readOnly,
+        onTap: widget.onTap,
         style: TextStyle(
           color: widget.useLightTheme
               ? appColors.secondaryDark

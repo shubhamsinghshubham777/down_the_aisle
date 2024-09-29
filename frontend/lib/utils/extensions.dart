@@ -75,6 +75,8 @@ extension SharedPreferencesX on SharedPreferences {
     return setString(_accessTokenKey, token);
   }
 
+  Future<void> deleteAccessToken() => remove(_accessTokenKey);
+
   String? get refreshToken => getString(_refreshTokenKey);
 
   Future<void> setRefreshToken(String? token) async {

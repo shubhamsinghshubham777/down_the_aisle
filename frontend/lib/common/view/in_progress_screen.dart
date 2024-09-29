@@ -4,14 +4,15 @@ import 'package:frontend/constants/assets.dart';
 import 'package:frontend/features/main/view/main_screen.dart';
 import 'package:frontend/utils/constants.dart';
 
-class InProgressAnimation extends StatelessWidget {
-  const InProgressAnimation({super.key});
+class InProgressScreen extends StatelessWidget {
+  const InProgressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const SizedBox(height: 24),
           Container(
             constraints: const BoxConstraints(maxWidth: 500, maxHeight: 500),
             padding: const EdgeInsets.symmetric(horizontal: 40),

@@ -49,8 +49,8 @@ class VenueList extends StatelessWidget {
 
 class _VenueItem extends StatelessWidget {
   const _VenueItem({
-    super.key,
     required this.isLastIndex,
+    super.key,
   });
 
   final bool isLastIndex;

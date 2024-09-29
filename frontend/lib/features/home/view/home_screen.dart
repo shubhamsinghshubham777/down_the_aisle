@@ -11,12 +11,7 @@ import 'package:frontend/features/home/view/upcoming_task_card.dart';
 import 'package:frontend/features/main/view/main_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({
-    super.key,
-    this.onDrawerOpen,
-  });
-
-  final VoidCallback? onDrawerOpen;
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,13 +19,10 @@ class HomeScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
+            const Stack(
               children: [
-                const SetupProfileSection(),
-                DTAAppBar(
-                  title: 'Welcome',
-                  onDrawerOpen: onDrawerOpen,
-                ),
+                SetupProfileSection(),
+                DTAAppBar(title: 'Welcome'),
               ],
             ),
             const SizedBox(height: 12),

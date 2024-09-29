@@ -1,4 +1,3 @@
-import 'package:core/models/auth/dta_user.dart';
 import 'package:core/models/auth/login_request.dart';
 import 'package:core/models/auth/register_request.dart';
 import 'package:core/models/auth/tokens.dart';
@@ -16,7 +15,4 @@ abstract class AuthService {
 
   @POST('/auth/register')
   Future<HttpResponse<String>> registerUser(@Body() RegisterRequest request);
-
-  @GET('/user/profile')
-  Future<HttpResponse<DTAUser>> getUserProfile();
 }

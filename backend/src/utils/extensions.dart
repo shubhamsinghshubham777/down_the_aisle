@@ -4,6 +4,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 import '../repositories/credential_manager.dart';
 import '../repositories/user_repository.dart';
+import 'custom_errors.dart';
 
 extension RequestX on Request {
   Future<Map<String, dynamic>> get bodyAsMap async {
@@ -16,23 +17,39 @@ extension MongoDbExtensions on Db {
 }
 
 extension RequestContextX on RequestContext {
-  bool get isGetRequest => request.method == HttpMethod.get;
-  bool get isPostRequest => request.method == HttpMethod.post;
-  bool get isPatchRequest => request.method == HttpMethod.patch;
-  bool get isDeleteRequest => request.method == HttpMethod.delete;
+  T onRequestMethod<T>({
+    required T Function() orElse,
+    T Function()? get,
+    T Function()? post,
+    T Function()? patch,
+    T Function()? delete,
+  }) {
+    final method = switch (request.method) {
+      HttpMethod.get => get?.call,
+      HttpMethod.post => post?.call,
+      HttpMethod.patch => patch?.call,
+      HttpMethod.delete => delete?.call,
+      _ => orElse.call,
+    };
+    return (method ?? orElse.call).call();
+  }
 
   Future<DTAUser?> get userFromJWT async {
     final token = request.headers.bearer();
     if (token != null) {
-      final userRepo = await read<Future<UserRepository>>();
-      final credentialManager = read<CredentialManager>();
+      final userRepo = await injectUserRepository();
+      final credentialManager = injectCredentialManager();
       final payload = credentialManager.verifyJWT(token);
       if (payload != null && payload.type == TokenType.access) {
         return userRepo.findUser(payload.email);
       }
     }
-    return null;
+    throw const JWTException();
   }
+
+  Future<UserRepository> injectUserRepository() => read();
+  CredentialManager injectCredentialManager() => read();
+  Future<Db> injectMongoDB() => read();
 }
 
 extension on Map<String, String> {

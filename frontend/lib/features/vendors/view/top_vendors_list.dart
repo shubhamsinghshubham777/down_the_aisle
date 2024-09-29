@@ -78,7 +78,9 @@ class TopVendorsList extends StatelessWidget {
                               Text(
                                 'Florist',
                                 style: TextStyle(
-                                  color: appColors.secondaryDark.withOpacity(0.8),
+                                  color: appColors.secondaryDark.withOpacity(
+                                    0.8,
+                                  ),
                                   fontSize: 14,
                                 ),
                                 maxLines: 1,

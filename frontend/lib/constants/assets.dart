@@ -40,6 +40,10 @@ class Assets {
 
   static const String imageAuthBgBorder = "assets/image/auth_bg_border.webp";
 
+  static const String imageAvatarMan = "assets/image/avatar_man.webp";
+
+  static const String imageAvatarOther = "assets/image/avatar_other.webp";
+
   static const String imageAvatarWoman = "assets/image/avatar_woman.webp";
 
   static const String imageFloralBg = "assets/image/floral_bg.png";
@@ -50,4 +54,3 @@ class Assets {
 
   static const String imageLocationAgra = "assets/image/location_agra.svg";
 }
-

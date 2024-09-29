@@ -11,6 +11,8 @@ class DTAUser with _$DTAUser {
     required Gender gender,
     String? hashedPassword,
     String? passwordSalt,
+    int? weddingBudget,
+    String? weddingDate,
   }) = _DTAUser;
 
   factory DTAUser.fromJson(Map<String, Object?> json) =>

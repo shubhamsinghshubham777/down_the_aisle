@@ -106,7 +106,8 @@ class _DueTaskListItem extends StatelessWidget {
                   Opacity(
                     opacity: 0.6,
                     child: Text(
-                      '${dateTime.day} ${dateTime.monthName}, ${dateTime.dayName}',
+                      '${dateTime.day} ${dateTime.monthName}, '
+                      '${dateTime.dayName}',
                       style: const TextStyle(
                         fontSize: 11,
                         fontFamily: Constants.fontKantumruy,
