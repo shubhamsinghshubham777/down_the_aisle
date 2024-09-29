@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:animations/animations.dart';
 import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -39,14 +40,16 @@ Future<void> main() async {
 }
 
 void _setupDesktopWindow() {
-  windowManager
-    ..ensureInitialized()
-    ..waitUntilReadyToShow(
-      const WindowOptions(minimumSize: Size(450, 450)),
-      () => windowManager
-        ..show()
-        ..focus(),
-    );
+  if (!kIsWeb) {
+    windowManager
+      ..ensureInitialized()
+      ..waitUntilReadyToShow(
+        const WindowOptions(minimumSize: Size(450, 450)),
+        () => windowManager
+          ..show()
+          ..focus(),
+      );
+  }
 }
 
 class App extends ConsumerStatefulWidget {
