@@ -1,0 +1,71 @@
+name: Deploy Flutter Web Frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish_frontend_web.yaml'
+      - 'core/**'
+      - 'frontend/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache Flutter packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.pub-cache
+          frontend/.dart_tool
+          core/.dart_tool
+        key: ${{ runner.os }}-pub-cache-${{ hashFiles('**/pubspec.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pub-cache-
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.2'
+        channel: 'stable'
+
+    - name: Generate .env files
+      run: |
+        echo "BASE_URL=http://localhost:8080" > ./frontend/.env.dev
+        echo "BASE_URL=${{ secrets.BASE_URL }}" > ./frontend/.env.prod
+
+    - name: Get dependencies (frontend)
+      working-directory: ./frontend
+      run: flutter pub get
+
+    - name: Get dependencies (core)
+      working-directory: ./core
+      run: flutter pub get
+
+    - name: Run build_runner (core)
+      working-directory: ./core
+      run: flutter pub run build_runner build --delete-conflicting-outputs
+
+    - name: Run build_runner (frontend)
+      working-directory: ./frontend
+      run: flutter pub run build_runner build --delete-conflicting-outputs
+
+    - name: Build web app
+      working-directory: ./frontend
+      run: flutter build web --dart-define APP_ENV=production
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./frontend/build/web

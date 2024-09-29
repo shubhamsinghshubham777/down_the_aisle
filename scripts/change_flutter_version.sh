@@ -14,9 +14,8 @@ VERSION=$1
 change_dir_and_use_fvm() {
     local dir=$1
     echo "Switching Flutter version in $dir directory..."
-    cd "$dir" || { echo "Error: Unable to change to the $dir directory."; exit 1; }
+    cd "../$dir" || { echo "Error: Unable to change to the $dir directory."; exit 1; }
     fvm use "$VERSION" || { echo "Error: fvm command failed in $dir. Make sure fvm is installed and the version is available."; exit 1; }
-    cd ..
 }
 
 # Function to update flutter-version in README.md
@@ -25,13 +24,24 @@ update_readme() {
     sed -i '' "s|chmod +x scripts/change_flutter_version.sh; ./scripts/change_flutter_version.sh 3.*|chmod +x scripts/change_flutter_version.sh; ./scripts/change_flutter_version.sh $VERSION|" README.md
 }
 
+# Function to update Flutter version in GitHub Actions workflow
+update_github_workflow() {
+    echo "Updating Flutter version in GitHub Actions workflow..."
+    sed -i '' "s/flutter-version: '.*'/flutter-version: '$VERSION'/" .github/workflows/publish_frontend_web.yaml
+}
+
 # Execute for frontend
 change_dir_and_use_fvm "frontend"
 
 # Execute for backend
 change_dir_and_use_fvm "backend"
 
+cd ..
+
 # Update README.md
 update_readme
 
-echo -e "\033[32m✓\033[0m Successfully switched to \033[36mFlutter Version $VERSION\033[0m in both frontend and backend directories and updated the GitHub workflow."
+# Update GitHub Actions workflow
+update_github_workflow
+
+echo -e "\033[32m✓\033[0m Successfully switched to \033[36mFlutter Version $VERSION\033[0m in both frontend and backend directories, updated the GitHub workflow, and modified the README."
