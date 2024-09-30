@@ -12,15 +12,7 @@ import '../src/utils/extensions.dart';
 Handler middleware(Handler handler) {
   return handler
       .use(requestLogger())
-      .use(
-        fromShelfMiddleware(
-          corsHeaders(
-            headers: {
-              ACCESS_CONTROL_ALLOW_ORIGIN: Platform.environment['CORS_URL']!,
-            },
-          ),
-        ),
-      )
+      .use(fromShelfMiddleware(corsHeaders()))
       .use(Middlewares.userRepository)
       .use(Middlewares.db)
       .use(Middlewares.credentialManager);
