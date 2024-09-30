@@ -62,7 +62,7 @@ jobs:
 
     - name: Build web app
       working-directory: ./frontend
-      run: flutter build web --dart-define APP_ENV=production
+      run: flutter build web --dart-define APP_ENV=production --base-href /down_the_aisle/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
