@@ -81,3 +81,7 @@ Generate files (continuous)
 ```sh
 fvm dart run build_runner watch --delete-conflicting-outputs
 ```
+
+# 🖼️ Design Credits
+
+"_Credit where credit is due_". Therefore, the complete credits (and a shoutout) for the designs of this app go to [Nickelfox Design](https://www.figma.com/@Nickelfox). I took inspiration from their freely available design file on Figma by the name of [Indian Wedding Planning App](https://www.figma.com/community/file/1159023832797091701/indian-wedding-planning-app). Do check out the rest of their designs to take inspiration for your next app, they're really cool!
