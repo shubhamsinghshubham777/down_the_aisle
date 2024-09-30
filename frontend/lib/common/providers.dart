@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/utils/extensions.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -36,6 +37,8 @@ Dio dio(DioRef ref) {
         },
       ),
       PrettyDioLogger(
+        // ignore: avoid_redundant_argument_values
+        enabled: kDebugMode,
         requestHeader: true,
         requestBody: true,
         responseHeader: true,
