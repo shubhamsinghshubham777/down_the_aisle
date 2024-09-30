@@ -85,3 +85,11 @@ fvm dart run build_runner watch --delete-conflicting-outputs
 # 🖼️ Design Credits
 
 "_Credit where credit is due_". Therefore, the complete credits (and a shoutout) for the designs of this app go to [Nickelfox Design](https://www.figma.com/@Nickelfox). I took inspiration from their freely available design file on Figma by the name of [Indian Wedding Planning App](https://www.figma.com/community/file/1159023832797091701/indian-wedding-planning-app). Do check out the rest of their designs to take inspiration for your next app, they're really cool!
+
+# 📚 Resources
+
+The requirement I faced while developing the `frontend` module of this system (i.e. to achieve a smooth transition while switching between pages while also being able to maintain their states) forced me to take inspiration from the world and create + publish my own first flutter library called `easy_animated_indexed_stack`.
+
+You can find it on:
+1. pub.dev ([easy_animated_indexed_stack](https://pub.dev/packages/easy_animated_indexed_stack))
+2. And I have also written a [Medium article](https://medium.com/@shubhamsinghshubham777/animate-screen-switches-for-indexedstack-in-flutter-a66fe488006b) explaining and demonstrating the need behind it and its benefits
