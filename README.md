@@ -52,7 +52,7 @@ This is a full-stack repository that contains code for both the `frontend` and `
 
 # 👨‍💻 Contribution
 
-Feel free to follow the `README.md` files of both `frontend` and `backend` modules to be able to run this project on your system locally and be able to contribute. All PRs are welcomed 🙌🏼
+Feel free to follow the `README.md` files of both [frontend](frontend/README.md) and [backend](backend/README.md) modules to be able to run this project on your system locally and be able to contribute. All PRs are welcomed 🙌🏼
 
 ## 👷 Maintenance
 
