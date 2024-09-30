@@ -26,6 +26,7 @@ export MONGO_CONNECTION_STRING="mongodb://<username>:<password>@<host>:<port>/<d
 export JWT_AUDIENCE="http://0.0.0.0:8080/"
 export JWT_ISSUER="http://0.0.0.0:8080/"
 export JWT_SECRET="dev_secret"
+export CORS_URL="http://0.0.0.0:8080/"
 
 # Print confirmation
 echo "Environment variables have been set:"
@@ -33,6 +34,7 @@ echo "MONGO_CONNECTION_STRING=$MONGO_CONNECTION_STRING"
 echo "JWT_AUDIENCE=$JWT_AUDIENCE"
 echo "JWT_ISSUER=$JWT_ISSUER"
 echo "JWT_SECRET=$JWT_SECRET"
+echo "CORS_URL=$CORS_URL"
 
 # Start the Dart Frog backend server
 dart_frog dev

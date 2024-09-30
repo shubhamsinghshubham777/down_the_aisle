@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:shelf_cors_headers/shelf_cors_headers.dart';
 
 import '../src/models/token_config.dart';
 import '../src/repositories/credential_manager.dart';
@@ -11,6 +12,15 @@ import '../src/utils/extensions.dart';
 Handler middleware(Handler handler) {
   return handler
       .use(requestLogger())
+      .use(
+        fromShelfMiddleware(
+          corsHeaders(
+            headers: {
+              ACCESS_CONTROL_ALLOW_ORIGIN: Platform.environment['CORS_URL']!,
+            },
+          ),
+        ),
+      )
       .use(Middlewares.userRepository)
       .use(Middlewares.db)
       .use(Middlewares.credentialManager);

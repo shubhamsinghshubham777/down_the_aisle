@@ -13,6 +13,7 @@ dependencies:
   dart_frog: ^1.1.0
   logger: ^2.4.0
   mongo_dart: ^0.10.3
+  shelf_cors_headers: ^0.1.5
 
 dev_dependencies:
   mocktail: ^1.0.3

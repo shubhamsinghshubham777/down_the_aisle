@@ -1,4 +1,4 @@
-name: Deploy Dart Frog Backend
+name: Test & Deploy Dart Frog Backend
 
 on:
   push:
@@ -21,10 +21,20 @@ jobs:
       uses: dart-lang/setup-dart@v1
     
     - name: Install Dependencies
-      run: |
-        cd backend
-        dart pub get
-        cd ..
+      working-directory: ./backend
+      run: dart pub get
+
+    - name: Get dependencies (core)
+      working-directory: ./core
+      run: dart pub get
+
+    - name: Run build_runner (core)
+      working-directory: ./core
+      run: dart run build_runner build --delete-conflicting-outputs
+
+    - name: Run Tests
+      working-directory: ./backend
+      run: dart test
     
     - name: Install Globe CLI
       run: dart pub global activate globe_cli
