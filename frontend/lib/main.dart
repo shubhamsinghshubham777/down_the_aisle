@@ -22,7 +22,7 @@ Future<void> main() async {
     (e) => e.name == const String.fromEnvironment('APP_ENV'),
     orElse: () => AppEnvironment.prod,
   );
-  await dotenv.load(fileName: '.env.${appEnv.name}');
+  await dotenv.load(fileName: 'dotenv.${appEnv.name}');
   unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

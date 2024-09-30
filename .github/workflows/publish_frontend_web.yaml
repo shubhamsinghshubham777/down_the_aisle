@@ -39,10 +39,10 @@ jobs:
         flutter-version: '3.24.2'
         channel: 'stable'
 
-    - name: Generate .env files
+    - name: Generate dotenv files
       run: |
-        echo "BASE_URL=http://localhost:8080" > ./frontend/.env.dev
-        echo "BASE_URL=${{ secrets.BASE_URL }}" > ./frontend/.env.prod
+        echo "BASE_URL=http://localhost:8080" > ./frontend/dotenv.dev
+        echo "BASE_URL=${{ secrets.BASE_URL }}" > ./frontend/dotenv.prod
 
     - name: Get dependencies (frontend)
       working-directory: ./frontend

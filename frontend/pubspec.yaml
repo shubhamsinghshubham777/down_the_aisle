@@ -44,8 +44,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - .env.dev
-    - .env.prod
+    - dotenv.dev
+    - dotenv.prod
     - assets/image/
     - assets/icon/
   fonts:
