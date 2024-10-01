@@ -58,6 +58,8 @@ Feel free to follow the `README.md` files of both [frontend](frontend/README.md)
 
 To quickly update the Flutter version used in both `frontend`, `backend`, and `.github/workflows` directories, copy-paste the following command in your terminal:
 
+> **Note:** This script assumes that you have installed [FVM](https://fvm.app) (which is mentioned in the tech-stack list above). Therefore please install it if you haven't already.
+
 ```sh
 chmod +x scripts/change_flutter_version.sh; ./scripts/change_flutter_version.sh NEW_FLUTTER_VERSION
 ```
