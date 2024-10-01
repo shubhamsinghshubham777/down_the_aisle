@@ -1,3 +1,4 @@
+import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/common/view/app_colors.dart';
@@ -59,7 +60,7 @@ class _LocationSelectorState extends State<LocationSelector> {
             Assets.imageLocationAgra,
             height: 104,
           ),
-          const SizedBox(height: 80),
+          SizedBox(height: 80 + context.mqViewPadding.top),
         ],
       ),
     );

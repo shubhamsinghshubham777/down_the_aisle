@@ -73,7 +73,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
               validator: (password) => password?.isNotEmpty ?? false
                   ? null
                   : 'Please enter a password',
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.visiblePassword,
             ),
             if (loginState.hasError)
               Padding(

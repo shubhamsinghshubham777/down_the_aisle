@@ -22,7 +22,7 @@ class SetupProfileSection extends ConsumerWidget {
 
     return HalfOnionDomeContainer(
       width: context.width,
-      height: 350,
+      height: 350 + context.mqViewPadding.top,
       child: Stack(
         children: [
           Image.asset(

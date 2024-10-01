@@ -1,3 +1,4 @@
+import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/common/view/app_colors.dart';
 import 'package:frontend/common/view/dta_app_bar.dart';
@@ -10,7 +11,7 @@ class TaskCountSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HalfOnionDomeContainer(
-      height: 276,
+      height: 276 + context.mqViewPadding.top,
       child: Column(
         children: [
           const DTAAppBar(title: 'Dashboard'),
