@@ -40,7 +40,11 @@ Future<void> main() async {
 }
 
 void _setupDesktopWindow() {
-  if (!kIsWeb) {
+  final isLinux = defaultTargetPlatform == TargetPlatform.linux;
+  final isMacOS = defaultTargetPlatform == TargetPlatform.macOS;
+  final isWindows = defaultTargetPlatform == TargetPlatform.windows;
+  final isDesktop = !kIsWeb && (isLinux || isMacOS || isWindows);
+  if (isDesktop) {
     windowManager
       ..ensureInitialized()
       ..waitUntilReadyToShow(
