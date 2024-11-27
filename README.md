@@ -47,8 +47,8 @@ This is a full-stack repository that contains code for both the `frontend` and `
 | **Database (Backend)**            | <img src="assets/logo_mongo_db.svg" width=48 />    | [Mongo DB](https://www.mongodb.com)                   |
 | **CI / CD**                       | <img src="assets/logo_github.svg" width=48 />      | [GitHub Actions](https://github.com/features/actions) |
 | **Version Management (Flutter)**  | <img src="assets/logo_fvm.svg" width=48 />         | [FVM](https://fvm.app)                                |
-| **Hosting (Frontend Web App)**    | <img src="assets/logo_globe.svg" width=48 />       | [Globe](https://globe.dev)                            |
-| **Hosting (Backend App)**         | <img src="assets/logo_github.svg" width=48 />      | [GitHub Pages](https://pages.github.com)              |
+| **Hosting (Backend App)**    | <img src="assets/logo_globe.svg" width=48 />       | [Globe](https://globe.dev)                            |
+| **Hosting (Frontend Web App)**         | <img src="assets/logo_github.svg" width=48 />      | [GitHub Pages](https://pages.github.com)              |
 
 # 👨‍💻 Contribution
 
